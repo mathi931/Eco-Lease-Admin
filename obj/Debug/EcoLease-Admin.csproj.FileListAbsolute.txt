@@ -1,0 +1,10 @@
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\EcoLease-Admin.exe.config
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\EcoLease-Admin.exe
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\EcoLease-Admin.pdb
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.csproj.AssemblyReference.cache
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.FrmMain.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.Properties.Resources.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.csproj.GenerateResource.cache
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.csproj.CoreCompileInputs.cache
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.exe
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.pdb
