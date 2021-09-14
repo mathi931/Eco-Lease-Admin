@@ -25,6 +25,10 @@ namespace EcoLease_Admin.Models
             Status = status;
         }
 
+        public Request()
+        {
+        }
+
         //object to string
         public override string ToString()
         {

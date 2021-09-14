@@ -33,7 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.2.0.90\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Classes\AgreementDataAccess.cs" />
+    <Compile Include="Data\Classes\DataAccessHelper.cs" />
     <Compile Include="Data\Interfaces\IAgreementHandler.cs" />
     <Compile Include="Data\Interfaces\IRequestHandler.cs" />
     <Compile Include="Data\Interfaces\IUserHandler.cs" />
@@ -138,6 +143,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -25,6 +25,10 @@ namespace EcoLease_Admin.Models
             DateOfBirth = dateOfBirth;
         }
 
+        public User()
+        {
+        }
+
         //object to string
         public override string ToString()
         {

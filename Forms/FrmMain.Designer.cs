@@ -34,6 +34,9 @@ namespace EcoLease_Admin
             this.btnAgreements = new System.Windows.Forms.Button();
             this.btnRequests = new System.Windows.Forms.Button();
             this.container = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.output = new System.Windows.Forms.Label();
+            this.container.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDashboard
@@ -74,10 +77,30 @@ namespace EcoLease_Admin
             // 
             // container
             // 
+            this.container.Controls.Add(this.output);
+            this.container.Controls.Add(this.button1);
             this.container.Location = new System.Drawing.Point(202, 1);
             this.container.Name = "container";
             this.container.Size = new System.Drawing.Size(1065, 760);
             this.container.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(114, 200);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(98, 37);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // output
+            // 
+            this.output.AutoSize = true;
+            this.output.Location = new System.Drawing.Point(114, 291);
+            this.output.Name = "output";
+            this.output.Size = new System.Drawing.Size(0, 20);
+            this.output.TabIndex = 1;
             // 
             // FrmMain
             // 
@@ -95,6 +118,8 @@ namespace EcoLease_Admin
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Eco Lease";
+            this.container.ResumeLayout(false);
+            this.container.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -106,5 +131,7 @@ namespace EcoLease_Admin
         private System.Windows.Forms.Button btnAgreements;
         private System.Windows.Forms.Button btnRequests;
         private System.Windows.Forms.Panel container;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label output;
     }
 }
