@@ -8,17 +8,17 @@ namespace EcoLease_Admin.Models
 {
     class Vehicle
     {
-        //create
-        public Vehicle(string make, string model, DateTime registered, string plateNo, int km, string notes, string status)
-        {
-            Make = make;
-            Model = model;
-            Registered = registered;
-            PlateNo = plateNo;
-            Km = km;
-            Notes = notes;
-            Status = status;
-        }
+        ////create
+        //public Vehicle(string make, string model, DateTime registered, string plateNo, int km, string notes, string status)
+        //{
+        //    Make = make;
+        //    Model = model;
+        //    Registered = registered;
+        //    PlateNo = plateNo;
+        //    Km = km;
+        //    Notes = notes;
+        //    Status = status;
+        //}
         //read, update, delete
         public Vehicle(int id, string make, string model, DateTime registered, string plateNo, int km, string notes, string status)
         {
@@ -35,7 +35,7 @@ namespace EcoLease_Admin.Models
         //object to string
         public override string ToString()
         {
-            return $"{Make} {Model} {PlateNo}"; 
+            return $"{Make} {Model} {Registered} {PlateNo} {Km}{Notes} {Status}"; 
         }
 
         //props

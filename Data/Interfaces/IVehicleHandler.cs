@@ -13,6 +13,8 @@ namespace EcoLease_Admin.Data
         Vehicle GetByID(int id);
         void Insert(Vehicle vehicle);
         void Update(Vehicle vehicle);
-        void Remove(Vehicle vehicle);
+        
+        void UpdateStatus(Vehicle vehicle);
+        void Remove(int id);
     }
 }

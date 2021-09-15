@@ -23,16 +23,18 @@ namespace EcoLease_Admin
 
         private void button1_Click(object sender, EventArgs e)
         {
-            User user = new User { Id = 1, FirstName = "Ferenc", LastName = "Kerekes", DateOfBirth = new DateTime(2015, 12, 2) };
+            VehicleDataAccess db = new VehicleDataAccess();
 
-            UserDataAccess db = new UserDataAccess();
-            db.Update(user);
+            Vehicle vagi = new Vehicle(1001, "Seat", "Leon", new DateTime(2020, 02, 12), "SD-222-EL", 223252, null, "On Lease");
 
-            u = new List<User>(db.GetAll());
-            for (int i = 0; i < u.Count; i++)
-            {
-                output.Text += $" {u[i].FirstName}";
-            }
+            output.Text = db.GetByID(1001).ToString();
+
+            //var list = new List<Vehicle>(db.GetAll());
+
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    output.Text += $"{list[i].Id} {list[i].Make} {list[i].Model} {list[i].Status}";
+            //}
         }
     }
 }
