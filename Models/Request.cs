@@ -8,37 +8,17 @@ namespace EcoLease_Admin.Models
 {
     class Request
     {
-        //create
-        public Request(User user, Vehicle vehicle, string status)
-        {
-            User = user;
-            Vehicle = vehicle;
-            Status = status;
-        }
-
-        //read edit delete
-        public Request(int id, User user, Vehicle vehicle, string status)
-        {
-            Id = id;
-            User = user;
-            Vehicle = vehicle;
-            Status = status;
-        }
-
-        public Request()
-        {
-        }
+        //props
+        public int RId { get; set; }
+        public string Status { get; set; }
+        public User User { get; set; }
+        public Vehicle Vehicle { get; set; }
 
         //object to string
         public override string ToString()
         {
-            return $"{User} requested {Vehicle} ({Status})"; 
+            return $"Request ID: {RId}. {User.FirstName} requested {Vehicle.Make} ({Status})"; 
         }
 
-        //props
-        public int Id { get; set; }
-        public User User { get; set; }
-        public Vehicle Vehicle { get; set; }
-        public string Status { get; set; }
     }
 }

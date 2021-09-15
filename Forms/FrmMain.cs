@@ -23,11 +23,14 @@ namespace EcoLease_Admin
 
         private void button1_Click(object sender, EventArgs e)
         {
-            VehicleDataAccess db = new VehicleDataAccess();
+            //VehicleDataAccess db = new VehicleDataAccess();
+            RequestDataAccess db = new RequestDataAccess();
 
-            Vehicle vagi = new Vehicle(1001, "Seat", "Leon", new DateTime(2020, 02, 12), "SD-222-EL", 223252, null, "On Lease");
+            //Vehicle vagi = new Vehicle(1001, "Seat", "Leon", new DateTime(2020, 02, 12), "SD-222-EL", 223252, null, "On Lease");
 
-            output.Text = db.GetByID(1001).ToString();
+            List<Request> r = db.GetAll();
+
+            output.Text = $"{r[0]}\n{r[1]}";
 
             //var list = new List<Vehicle>(db.GetAll());
 

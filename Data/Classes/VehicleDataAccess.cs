@@ -16,10 +16,10 @@ namespace EcoLease_Admin.Data
         public List<Vehicle> GetAll()
         {
             //sql query in variable
-            string query = @"SELECT v.id, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name AS status
+            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name AS status
                              FROM Vehicles v 
                              LEFT JOIN Statuses s
-                             ON v.statusID = s.id";
+                             ON v.statusID = s.sID";
   
             try
             {
@@ -42,11 +42,11 @@ namespace EcoLease_Admin.Data
         public Vehicle GetByID(int id)
         {
             //sql query for get a vehicle by ID
-            string query = @"SELECT v.id, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name AS status
+            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name AS status
                              FROM Vehicles v 
                              LEFT JOIN Statuses s
-                             ON v.statusID = s.id
-                             WHERE v.id = @id";
+                             ON v.statusID = s.sID
+                             WHERE v.vID = @id";
             try
             {
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
@@ -67,7 +67,7 @@ namespace EcoLease_Admin.Data
         async public void Insert(Vehicle vehicle)
         {
             //sql query for get the status id
-            string queryGetID = @"SELECT @statusID = id from Statuses WHERE name = @statusName";
+            string queryGetID = @"SELECT @statusID = sID from Statuses WHERE name = @statusName";
 
             //sql query for insert the new vehicle
             string queryInsert = @"INSERT INTO Vehicles (make, model, registered, plateNo, km, notes, statusID) values(@make, @model, @registered, @plateNo, @km, @notes, @statusID)";
@@ -106,7 +106,7 @@ namespace EcoLease_Admin.Data
         public void Remove(int id)
         {
             //sql query for delete vehicle by ID
-            string query = @"DELETE FROM Vehicles WHERE id = @id";
+            string query = @"DELETE FROM Vehicles WHERE vID = @id";
             try
             {
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
@@ -127,10 +127,10 @@ namespace EcoLease_Admin.Data
         async public void Update(Vehicle vehicle)
         {
             //query for get the status ID
-            string queryGetID = @"SELECT id from Statuses WHERE name = @statusName";
+            string queryGetID = @"SELECT sID from Statuses WHERE name = @statusName";
 
             //query for update the vehicle
-            string queryUpdate = @"UPDATE Vehicles SET make = @make, model = @model, registered = @registered, plateNo = @plateNo, km = @km, notes = @notes, statusID = @statusID WHERE id = @id";
+            string queryUpdate = @"UPDATE Vehicles SET make = @make, model = @model, registered = @registered, plateNo = @plateNo, km = @km, notes = @notes, statusID = @statusID WHERE vID = @id";
 
             try
             {
@@ -143,7 +143,7 @@ namespace EcoLease_Admin.Data
                     //creates a local variable with the id
                     var v = new
                     {
-                        id = vehicle.Id,
+                        id = vehicle.VId,
                         make = vehicle.Make,
                         model = vehicle.Model,
                         registered = vehicle.Registered,
@@ -169,9 +169,9 @@ namespace EcoLease_Admin.Data
         async public void UpdateStatus(Vehicle vehicle)
         {
             //query for get the status ID
-            string queryGetID = @"SELECT id from Statuses WHERE name = @status";
+            string queryGetID = @"SELECT sID from Statuses WHERE name = @status";
             //query for update the status
-            string queryUpdate = @"UPDATE Vehicles SET statusID = @statusID WHERE id = @id";
+            string queryUpdate = @"UPDATE Vehicles SET statusID = @statusID WHERE vID = @id";
 
             try
             {
@@ -182,7 +182,7 @@ namespace EcoLease_Admin.Data
                     var statusID = await connection.ExecuteScalarAsync(queryGetID, new { status = vehicle.Status });
 
                     //runs the update with the new local variable
-                    connection.Execute(queryUpdate, new { statusID = statusID, id = vehicle.Id});
+                    connection.Execute(queryUpdate, new { statusID = statusID, id = vehicle.VId});
                 }
             }
             catch (SqlException exp)

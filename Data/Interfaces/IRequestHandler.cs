@@ -11,8 +11,7 @@ namespace EcoLease_Admin.Data
     {
         //CRUD
         List<Request> GetAll();
-        Request GetByID(int id);
-        void Insert(Request request);
+        Request GetByStatus(string status);
         void Update(Request request);
         void Remove(Request request);
     }

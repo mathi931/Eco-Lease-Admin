@@ -8,6 +8,34 @@ namespace EcoLease_Admin.Models
 {
     class User
     {
+        //props
+        public int UId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //create
         public User(string firstName, string lastName, DateTime dateOfBirth)
         {
@@ -17,9 +45,9 @@ namespace EcoLease_Admin.Models
         }
 
         //read, update, delete
-        public User(int id, string firstName, string lastName, DateTime dateOfBirth)
+        public User(int uid, string firstName, string lastName, DateTime dateOfBirth)
         {
-            Id = id;
+            UId = uid;
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
@@ -34,11 +62,5 @@ namespace EcoLease_Admin.Models
         {
             return $"{FirstName} {LastName}"; 
         }
-
-        //props
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime DateOfBirth { get; set; }
     }
 }

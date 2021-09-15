@@ -59,7 +59,7 @@ namespace EcoLease_Admin.Data
             try
             {
                 //query to remove a user by ID
-                var query = @"DELETE FROM Users WHERE id = @id";
+                var query = @"DELETE FROM Users WHERE uID = @uid";
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
@@ -80,7 +80,7 @@ namespace EcoLease_Admin.Data
             try
             {
                 //query for update a user by id
-                var sql = @"update Users SET firstName = @firstName, lastName = @lastName, dateOfBirth = @dateOfBirth WHERE id = @id";
+                var sql = @"update Users SET firstName = @firstName, lastName = @lastName, dateOfBirth = @dateOfBirth WHERE uID = @uid";
 
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
