@@ -24,12 +24,14 @@ namespace EcoLease_Admin
         private void button1_Click(object sender, EventArgs e)
         {
             //test the requests
-            RequestDataAccess db = new RequestDataAccess();
+            AgreementDataAccess db = new AgreementDataAccess();
 
-            List<Request> r = db.GetAll();
+            List<Agreement> r = db.GetAll();
 
-
-            output.Text = $"{r[0]}\n{r[1]}";
+            foreach (var item in r)
+            {
+                output.Text += $"ID:{item.AId} PERIOD:{item.LeaseBegin} - {item.LeaseLast} USER: {item.User.UId}. {item.User.FirstName} VEHICLE: {item.Vehicle.PlateNo} \n";
+            }
         }
     }
 }
