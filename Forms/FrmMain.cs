@@ -30,6 +30,10 @@ namespace EcoLease_Admin
 
             List<Request> r = db.GetAll();
 
+            r[0].Status = "Accepted";
+
+            db.Remove(r[0]);
+
             output.Text = $"{r[0]}\n{r[1]}";
 
             //var list = new List<Vehicle>(db.GetAll());
