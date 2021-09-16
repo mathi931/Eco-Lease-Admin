@@ -96,6 +96,7 @@ namespace EcoLease_Admin.Data
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
+                    //runs the query with the passed object
                     connection.Execute(query, request);
                 }
             }
@@ -119,6 +120,7 @@ namespace EcoLease_Admin.Data
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
+                    //runs the query with a new object what contains the needed variables
                     connection.Execute(query, new { status = request.Status, vID = request.Vehicle.VId, rID = request.RId});
                 }
             }
