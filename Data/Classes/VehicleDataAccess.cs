@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Linq;
 using static EcoLease_Admin.Data.Classes.DataAccessHelper;
 
@@ -15,7 +14,7 @@ namespace EcoLease_Admin.Data
         //gets all the vehicles
         public List<Vehicle> GetAll()
         {
-            //sql query in variable
+            //sql query for get all
             string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name AS status
                              FROM Vehicles v 
                              LEFT JOIN Statuses s
