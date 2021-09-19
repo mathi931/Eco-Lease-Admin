@@ -15,7 +15,7 @@ namespace EcoLease_Admin.Data
         public List<Vehicle> GetAll()
         {
             //sql query for get all
-            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name AS status
+            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img s.name AS status
                              FROM Vehicles v 
                              LEFT JOIN Statuses s
                              ON v.statusID = s.sID";
@@ -41,7 +41,7 @@ namespace EcoLease_Admin.Data
         public Vehicle GetByID(int id)
         {
             //sql query for get a vehicle by ID
-            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name AS status
+            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, s.name AS status
                              FROM Vehicles v 
                              LEFT JOIN Statuses s
                              ON v.statusID = s.sID
@@ -69,7 +69,7 @@ namespace EcoLease_Admin.Data
             string queryGetID = @"SELECT @statusID = sID from Statuses WHERE name = @statusName";
 
             //sql query for insert the new vehicle
-            string queryInsert = @"INSERT INTO Vehicles (make, model, registered, plateNo, km, notes, statusID) values(@make, @model, @registered, @plateNo, @km, @notes, @statusID)";
+            string queryInsert = @"INSERT INTO Vehicles (make, model, registered, plateNo, km, notes, img, statusID) values(@make, @model, @registered, @plateNo, @km, @notes, @img, @statusID)";
 
             try
             {
@@ -129,7 +129,7 @@ namespace EcoLease_Admin.Data
             string queryGetID = @"SELECT sID from Statuses WHERE name = @statusName";
 
             //query for update the vehicle
-            string queryUpdate = @"UPDATE Vehicles SET make = @make, model = @model, registered = @registered, plateNo = @plateNo, km = @km, notes = @notes, statusID = @statusID WHERE vID = @id";
+            string queryUpdate = @"UPDATE Vehicles SET make = @make, model = @model, registered = @registered, plateNo = @plateNo, km = @km, notes = @notes, img = @img, statusID = @statusID WHERE vID = @id";
 
             try
             {
@@ -149,6 +149,7 @@ namespace EcoLease_Admin.Data
                         plateNo = vehicle.PlateNo,
                         km = vehicle.Km,
                         notes = vehicle.Notes,
+                        img = vehicle.Img,
                         statusID = id
                     };
 

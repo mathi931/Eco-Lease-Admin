@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,14 +25,18 @@ namespace EcoLease_Admin
         private void button1_Click(object sender, EventArgs e)
         {
             //test the requests
-            AgreementDataAccess db = new AgreementDataAccess();
+            //AgreementDataAccess db = new AgreementDataAccess();
 
-            List<Agreement> r = db.GetAll();
+            //List<Agreement> r = db.GetAll();
 
-            foreach (var item in r)
-            {
-                output.Text += $"ID:{item.AId} PERIOD:{item.LeaseBegin} - {item.LeaseLast} USER: {item.User.UId}. {item.User.FirstName} VEHICLE: {item.Vehicle.PlateNo} \n";
-            }
+            //foreach (var item in r)
+            //{
+            //    output.Text += $"ID:{item.AId} PERIOD:{item.LeaseBegin} - {item.LeaseLast} USER: {item.User.UId}. {item.User.FirstName} VEHICLE: {item.Vehicle.PlateNo} \n";
+            //}
+            string fileName = "img1.jpg";
+            string basePath = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
+            string fullPath = Path.Combine(basePath, @"Resources\", fileName);
+            output.Text = fullPath;
         }
     }
 }
