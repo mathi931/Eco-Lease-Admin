@@ -16,7 +16,7 @@ namespace EcoLease_Admin.Data
         public List<Agreement> GetAll()
         {
             //query to get the agreement objects
-            string query = @"SELECT ag.aID, ag.leaseBegin, ag.leaseLast, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, st.name as status
+            string query = @"SELECT ag.aID, ag.leaseBegin, ag.leaseLast, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
                             FROM Agreements ag
                             LEFT JOIN Statuses st ON ag.statusID = st.sID
                             INNER JOIN Users u ON ag.userID = u.uID
@@ -51,7 +51,7 @@ namespace EcoLease_Admin.Data
         public Agreement GetByID(int id)
         {
             //query to get the agreement object
-            string query = @"SELECT ag.aID, ag.leaseBegin, ag.leaseLast, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, st.name as status
+            string query = @"SELECT ag.aID, ag.leaseBegin, ag.leaseLast, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
                             FROM Agreements ag
                             LEFT JOIN Statuses st ON ag.statusID = st.sID
                             INNER JOIN Users u ON ag.userID = u.uID
