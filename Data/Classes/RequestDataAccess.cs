@@ -16,7 +16,7 @@ namespace EcoLease_Admin.Data
         public List<Request> GetAll()
         {
             //query to get the request objects
-            string query = @"SELECT re.rID, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, st.name as status
+            string query = @"SELECT re.rID, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
                             FROM Requests re
                             LEFT JOIN Statuses st ON re.statusID = st.sID
                             INNER JOIN Users u ON re.userID = u.uID
