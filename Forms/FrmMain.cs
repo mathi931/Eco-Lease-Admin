@@ -1,6 +1,7 @@
 ﻿using EcoLease_Admin.Data;
 using EcoLease_Admin.Data.Classes;
 using EcoLease_Admin.Models;
+using EcoLease_Admin.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,21 +23,20 @@ namespace EcoLease_Admin
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void FrmMain_Load(object sender, EventArgs e)
         {
-            //test the requests
-            //AgreementDataAccess db = new AgreementDataAccess();
-
-            //List<Agreement> r = db.GetAll();
-
-            //foreach (var item in r)
-            //{
-            //    output.Text += $"ID:{item.AId} PERIOD:{item.LeaseBegin} - {item.LeaseLast} USER: {item.User.UId}. {item.User.FirstName} VEHICLE: {item.Vehicle.PlateNo} \n";
-            //}
-            string fileName = "img1.jpg";
-            string basePath = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
-            string fullPath = Path.Combine(basePath, @"Resources\", fileName);
-            output.Text = fullPath;
+            Main_Dashboard dashboard = new Main_Dashboard();
+            showControl(this.container, dashboard);
         }
+        public void showControl(Panel container, Control control)
+        {
+            container.Controls.Clear();
+            control.Dock = DockStyle.Fill;
+            control.BringToFront();
+            control.Focus();
+            container.Controls.Add(control);
+        }
+
     }
 }

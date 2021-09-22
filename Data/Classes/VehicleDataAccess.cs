@@ -15,7 +15,7 @@ namespace EcoLease_Admin.Data
         public List<Vehicle> GetAll()
         {
             //sql query for get all
-            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img s.name AS status
+            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, s.name AS status
                              FROM Vehicles v 
                              LEFT JOIN Statuses s
                              ON v.statusID = s.sID";
