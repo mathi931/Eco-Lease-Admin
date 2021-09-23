@@ -46,6 +46,7 @@ namespace EcoLease_Admin
             this.btnDashboard.TabIndex = 0;
             this.btnDashboard.Text = "Dashboard";
             this.btnDashboard.UseVisualStyleBackColor = true;
+            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // btnVehicles
             // 
@@ -55,6 +56,7 @@ namespace EcoLease_Admin
             this.btnVehicles.TabIndex = 1;
             this.btnVehicles.Text = "Vehicles";
             this.btnVehicles.UseVisualStyleBackColor = true;
+            this.btnVehicles.Click += new System.EventHandler(this.btnVehicles_Click);
             // 
             // btnAgreements
             // 
@@ -64,6 +66,7 @@ namespace EcoLease_Admin
             this.btnAgreements.TabIndex = 2;
             this.btnAgreements.Text = "Agreements";
             this.btnAgreements.UseVisualStyleBackColor = true;
+            this.btnAgreements.Click += new System.EventHandler(this.btnAgreements_Click);
             // 
             // btnRequests
             // 
@@ -73,6 +76,7 @@ namespace EcoLease_Admin
             this.btnRequests.TabIndex = 3;
             this.btnRequests.Text = "Requests";
             this.btnRequests.UseVisualStyleBackColor = true;
+            this.btnRequests.Click += new System.EventHandler(this.btnRequests_Click);
             // 
             // container
             // 

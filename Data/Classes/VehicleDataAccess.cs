@@ -66,10 +66,10 @@ namespace EcoLease_Admin.Data
         async public void Insert(Vehicle vehicle)
         {
             //sql query for get the status id
-            string queryGetID = @"SELECT @statusID = sID from Statuses WHERE name = @statusName";
+            string queryGetID = @"SELECT s.sID from Statuses as s WHERE s.name = @statusName";
 
             //sql query for insert the new vehicle
-            string queryInsert = @"INSERT INTO Vehicles (make, model, registered, plateNo, km, notes, img, statusID) values(@make, @model, @registered, @plateNo, @km, @notes, @img, @statusID)";
+            string queryInsert = @"INSERT INTO Vehicles (make, model, registered, plateNo, km, notes, statusID, img) values(@make, @model, @registered, @plateNo, @km, @notes, @statusID,  @img)";
 
             try
             {
@@ -88,7 +88,8 @@ namespace EcoLease_Admin.Data
                         plateNo = vehicle.PlateNo,
                         km = vehicle.Km,
                         notes = vehicle.Notes,
-                        statusID = id
+                        statusID = id,
+                        img = vehicle.Img
                     };
                     //inserts the new object into the vehicles table
                     connection.Execute(queryInsert, v);
@@ -126,10 +127,10 @@ namespace EcoLease_Admin.Data
         async public void Update(Vehicle vehicle)
         {
             //query for get the status ID
-            string queryGetID = @"SELECT sID from Statuses WHERE name = @statusName";
+            string queryGetID = @"SELECT s.sID from Statuses as s WHERE s.name = @status";
 
             //query for update the vehicle
-            string queryUpdate = @"UPDATE Vehicles SET make = @make, model = @model, registered = @registered, plateNo = @plateNo, km = @km, notes = @notes, img = @img, statusID = @statusID WHERE vID = @id";
+            string queryUpdate = @"UPDATE Vehicles SET make = @make, model = @model, registered = @registered, plateNo = @plateNo, km = @km, notes = @notes, statusID = @statusID, img = @img WHERE vID = @id";
 
             try
             {
@@ -137,7 +138,7 @@ namespace EcoLease_Admin.Data
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
                     //gets the id with async function and saves locally
-                    int id = await connection.ExecuteScalarAsync<int>(queryGetID,  new { statusName = vehicle.Status});
+                    int id = await connection.ExecuteScalarAsync<int>(queryGetID,  new { status = vehicle.Status});
 
                     //creates a local variable with the id
                     var v = new

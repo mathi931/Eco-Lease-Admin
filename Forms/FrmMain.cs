@@ -38,5 +38,26 @@ namespace EcoLease_Admin
             container.Controls.Add(control);
         }
 
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            Main_Dashboard dashboard = new Main_Dashboard();
+            showControl(this.container, dashboard);
+        }
+
+        private void btnVehicles_Click(object sender, EventArgs e)
+        {
+            Vehicles vehicles = new Vehicles();
+            showControl(this.container, vehicles);
+        }
+
+        private void btnAgreements_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRequests_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

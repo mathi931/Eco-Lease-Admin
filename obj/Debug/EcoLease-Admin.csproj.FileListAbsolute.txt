@@ -12,3 +12,13 @@ C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\Dapper.dll
 C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\Dapper.xml
 C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.csproj.CopyComplete
 C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Main_Dashboard.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Vehicles.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Vehicles_Dashboard.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Vehicles_Edit.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\AdvancedDataGridView.dll
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\FastMember.dll
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\AdvancedDataGridView.xml
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\fr\AdvancedDataGridView.resources.dll
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\ru\AdvancedDataGridView.resources.dll
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\FluentValidation.dll
+C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\FluentValidation.xml

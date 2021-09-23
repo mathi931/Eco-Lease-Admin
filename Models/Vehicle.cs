@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace EcoLease_Admin.Models
 {
-    class Vehicle
+    public class Vehicle
     {
         //props
         public int VId { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
-        public DateTime Registered { get; set; }
+        public int Registered { get; set; }
         public string PlateNo { get; set; }
         public int Km { get; set; }
         public string Notes { get; set; }
@@ -31,7 +31,7 @@ namespace EcoLease_Admin.Models
         //    Status = status;
         //}
         //read, update, delete
-        public Vehicle(int vid, string make, string model, DateTime registered, string plateNo, int km, string notes, string img, string status)
+        public Vehicle(int vid, string make, string model, int registered, string plateNo, int km, string notes, string status, string img)
         {
             VId = vid;
             Make = make;
@@ -40,10 +40,13 @@ namespace EcoLease_Admin.Models
             PlateNo = plateNo;
             Km = km;
             Notes = notes;
-            Img = img;
             Status = status;
+            Img = img;
         }
+        public Vehicle()
+        {
 
+        }
         //object to string
         public override string ToString()
         {

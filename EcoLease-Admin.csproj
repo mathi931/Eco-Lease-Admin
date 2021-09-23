@@ -36,8 +36,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedDataGridView, Version=0.1.0.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ADGV.0.1.0.10\lib\net40\AdvancedDataGridView.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Dapper.2.0.90\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FastMember.1.5.0\lib\net461\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>packages\FluentValidation.10.3.3\lib\netstandard2.0\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -55,8 +64,10 @@
   <ItemGroup>
     <Compile Include="Data\Classes\AgreementDataAccess.cs" />
     <Compile Include="Data\Classes\DataAccessHelper.cs" />
+    <Compile Include="Data\Classes\StatusDataAccess.cs" />
     <Compile Include="Data\Interfaces\IAgreementHandler.cs" />
     <Compile Include="Data\Interfaces\IRequestHandler.cs" />
+    <Compile Include="Data\Interfaces\IStatusHandler.cs" />
     <Compile Include="Data\Interfaces\IUserHandler.cs" />
     <Compile Include="Data\Interfaces\IVehicleHandler.cs" />
     <Compile Include="Data\Classes\RequestDataAccess.cs" />
@@ -76,6 +87,7 @@
     </Compile>
     <Compile Include="Models\Agreement.cs" />
     <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Program.cs" />
@@ -98,12 +110,15 @@
     <Compile Include="UserControls\Agreements_Edit.Designer.cs">
       <DependentUpon>Agreements_Edit.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Methods\DataGridViewMethods.cs" />
+    <Compile Include="UserControls\Methods\DataTableExtensions.cs" />
     <Compile Include="UserControls\Main_Dashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\Main_Dashboard.Designer.cs">
       <DependentUpon>Main_Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Methods\MessageBoxes.cs" />
     <Compile Include="UserControls\Requests.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -134,6 +149,8 @@
     <Compile Include="UserControls\Vehicles_Edit.Designer.cs">
       <DependentUpon>Vehicles_Edit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Validators\AgreementValidator.cs" />
+    <Compile Include="Validators\VehicleValidator.cs" />
     <EmbeddedResource Include="Forms\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +165,15 @@
     </Compile>
     <EmbeddedResource Include="UserControls\Main_Dashboard.resx">
       <DependentUpon>Main_Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Vehicles.resx">
+      <DependentUpon>Vehicles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Vehicles_Dashboard.resx">
+      <DependentUpon>Vehicles_Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Vehicles_Edit.resx">
+      <DependentUpon>Vehicles_Edit.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
