@@ -10,6 +10,8 @@ namespace EcoLease_Admin.Models
     {
         //props
         public int RId { get; set; }
+        public DateTime LeaseBegin { get; set; }
+        public DateTime LeaseLast { get; set; }
         public string Status { get; set; }
         public User User { get; set; }
         public Vehicle Vehicle { get; set; }
@@ -19,6 +21,5 @@ namespace EcoLease_Admin.Models
         {
             return $"Request ID: {RId}. {User.FirstName} requested {Vehicle.Make} ({Status})"; 
         }
-
     }
 }
