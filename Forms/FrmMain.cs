@@ -57,7 +57,8 @@ namespace EcoLease_Admin
 
         private void btnRequests_Click(object sender, EventArgs e)
         {
-
+            Requests requests = new Requests();
+            showControl(this.container, requests);
         }
     }
 }

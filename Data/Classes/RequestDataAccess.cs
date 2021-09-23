@@ -16,7 +16,7 @@ namespace EcoLease_Admin.Data
         public List<Request> GetAll()
         {
             //query to get the request objects
-            string query = @"SELECT re.rID, st.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, s.name as status
+            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, st.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name as status, v.img 
                             FROM Requests re
                             LEFT JOIN Statuses st ON re.statusID = st.sID
                             INNER JOIN Users u ON re.userID = u.uID
@@ -103,7 +103,7 @@ namespace EcoLease_Admin.Data
             catch (SqlException exp)
             {
                 //throws an error if the data access is unsucsessfull
-                throw new InvalidOperationException("Data could not be update", exp);
+                throw new InvalidOperationException("Data could not be removed", exp);
             }
         }
 

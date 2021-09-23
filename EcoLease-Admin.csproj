@@ -166,6 +166,9 @@
     <EmbeddedResource Include="UserControls\Main_Dashboard.resx">
       <DependentUpon>Main_Dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Requests.resx">
+      <DependentUpon>Requests.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Vehicles.resx">
       <DependentUpon>Vehicles.cs</DependentUpon>
     </EmbeddedResource>

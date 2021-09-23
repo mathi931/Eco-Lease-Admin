@@ -22,3 +22,4 @@ C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\fr\AdvancedDataGridView.res
 C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\ru\AdvancedDataGridView.resources.dll
 C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\FluentValidation.dll
 C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\FluentValidation.xml
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Requests.resources
