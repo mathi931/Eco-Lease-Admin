@@ -31,7 +31,7 @@ namespace EcoLease_Admin.UserControls
             dgvRequests.Columns.Add("leaseFrom", "Lease From");
             dgvRequests.Columns.Add("leaseLast", "Lease Until");
             dgvRequests.Columns.Add("status", "Status");
-            dgvRequests.Columns.Add("user", "User");
+            dgvRequests.Columns.Add("user", "Customer");
             dgvRequests.Columns.Add("vehicle", "Vehicle");
 
         }

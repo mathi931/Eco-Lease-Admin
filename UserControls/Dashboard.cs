@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace EcoLease_Admin.UserControls
 {
-    public partial class Main_Dashboard : UserControl
+    public partial class Dashboard : UserControl
     {
         List<Vehicle> vehicles = new List<Vehicle>();
-        List<Agreement> agreements = new List<Agreement>();
+        List<Reservation> agreements = new List<Reservation>();
         List<Request> requests = new List<Request>();
 
-        public Main_Dashboard()
+        public Dashboard()
         {
             InitializeComponent();
             //get all data
@@ -27,7 +27,7 @@ namespace EcoLease_Admin.UserControls
             fillView(vehicles, agreements, requests);
         }
 
-        private void fillView(List<Vehicle> vehicles, List<Agreement> agreements, List<Request> requests)
+        private void fillView(List<Vehicle> vehicles, List<Reservation> agreements, List<Request> requests)
         {
             fillVehiclePnl(vehicles);
             fillAgreementsPnl(agreements);
@@ -41,7 +41,7 @@ namespace EcoLease_Admin.UserControls
             lblDeclinedRequestCount.Text = requests.Count(n => n.Status == "Declined").ToString();
         }
 
-        private void fillAgreementsPnl(List<Agreement> agreements)
+        private void fillAgreementsPnl(List<Reservation> agreements)
         {
             lblActiveAgrCount.Text = agreements.Count(n => n.LeaseBegin >= DateTime.Today && n.LeaseLast < DateTime.Today).ToString();
             lblStartsSoonCount.Text = agreements.Count(n => n.LeaseBegin < DateTime.Today.AddDays(3)).ToString();
@@ -61,7 +61,7 @@ namespace EcoLease_Admin.UserControls
         private void getAllData()
         {
             vehicles = new VehicleDataAccess().GetAll();
-            agreements = new AgreementDataAccess().GetAll();
+            agreements = new ReservationDataAccess().GetAll();
             requests = new RequestDataAccess().GetAll();
 
         }

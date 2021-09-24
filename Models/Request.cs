@@ -13,7 +13,7 @@ namespace EcoLease_Admin.Models
         public DateTime LeaseBegin { get; set; }
         public DateTime LeaseLast { get; set; }
         public string Status { get; set; }
-        public User User { get; set; }
+        public Customer User { get; set; }
         public Vehicle Vehicle { get; set; }
 
         //object to string

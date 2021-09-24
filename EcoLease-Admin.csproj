@@ -62,16 +62,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Classes\AgreementDataAccess.cs" />
+    <Compile Include="Data\Classes\ReservationDataAccess.cs" />
     <Compile Include="Data\Classes\DataAccessHelper.cs" />
     <Compile Include="Data\Classes\StatusDataAccess.cs" />
-    <Compile Include="Data\Interfaces\IAgreementHandler.cs" />
+    <Compile Include="Data\Interfaces\IReservationHandler.cs" />
     <Compile Include="Data\Interfaces\IRequestHandler.cs" />
     <Compile Include="Data\Interfaces\IStatusHandler.cs" />
-    <Compile Include="Data\Interfaces\IUserHandler.cs" />
+    <Compile Include="Data\Interfaces\ICustomerHandler.cs" />
     <Compile Include="Data\Interfaces\IVehicleHandler.cs" />
     <Compile Include="Data\Classes\RequestDataAccess.cs" />
-    <Compile Include="Data\Classes\UserDataAccess.cs" />
+    <Compile Include="Data\Classes\CustomerDataAccess.cs" />
     <Compile Include="Data\Classes\VehicleDataAccess.cs" />
     <Compile Include="Forms\FrmLogin.cs">
       <SubType>Form</SubType>
@@ -85,30 +85,30 @@
     <Compile Include="Forms\FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Agreement.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\Agreements.cs">
+    <Compile Include="UserControls\Reservations.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Agreements.Designer.cs">
-      <DependentUpon>Agreements.cs</DependentUpon>
+    <Compile Include="UserControls\Reservations.Designer.cs">
+      <DependentUpon>Reservations.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Agreements_Dashboard.cs">
+    <Compile Include="UserControls\Reservations_Dashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Agreements_Dashboard.Designer.cs">
-      <DependentUpon>Agreements_Dashboard.cs</DependentUpon>
+    <Compile Include="UserControls\Reservations_Dashboard.Designer.cs">
+      <DependentUpon>Reservations_Dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Agreements_Edit.cs">
+    <Compile Include="UserControls\Reservations_Edit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Agreements_Edit.Designer.cs">
-      <DependentUpon>Agreements_Edit.cs</DependentUpon>
+    <Compile Include="UserControls\Reservations_Edit.Designer.cs">
+      <DependentUpon>Reservations_Edit.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Methods\DataGridViewMethods.cs" />
     <Compile Include="UserControls\Methods\DataTableExtensions.cs" />
@@ -125,11 +125,11 @@
     <Compile Include="UserControls\Requests.Designer.cs">
       <DependentUpon>Requests.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Users.cs">
+    <Compile Include="UserControls\Customers.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Users.Designer.cs">
-      <DependentUpon>Users.cs</DependentUpon>
+    <Compile Include="UserControls\Customers.Designer.cs">
+      <DependentUpon>Customers.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Vehicles.cs">
       <SubType>UserControl</SubType>
@@ -149,7 +149,7 @@
     <Compile Include="UserControls\Vehicles_Edit.Designer.cs">
       <DependentUpon>Vehicles_Edit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Validators\AgreementValidator.cs" />
+    <Compile Include="Validators\ReservationValidator.cs" />
     <Compile Include="Validators\VehicleValidator.cs" />
     <EmbeddedResource Include="Forms\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
@@ -163,14 +163,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\Agreements.resx">
-      <DependentUpon>Agreements.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Reservations.resx">
+      <DependentUpon>Reservations.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Agreements_Dashboard.resx">
-      <DependentUpon>Agreements_Dashboard.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Reservations_Dashboard.resx">
+      <DependentUpon>Reservations_Dashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Agreements_Edit.resx">
-      <DependentUpon>Agreements_Edit.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Reservations_Edit.resx">
+      <DependentUpon>Reservations_Edit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Main_Dashboard.resx">
       <DependentUpon>Main_Dashboard.cs</DependentUpon>

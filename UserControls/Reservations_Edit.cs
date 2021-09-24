@@ -14,11 +14,11 @@ using static EcoLease_Admin.UserControls.Methods.MessageBoxes;
 
 namespace EcoLease_Admin.UserControls
 {
-    public partial class Agreements_Edit : UserControl
+    public partial class Reservations_Edit : UserControl
     {
         Panel mainPnl;
         bool update;
-        public Agreements_Edit(Panel pnl, Agreement editable = null)
+        public Reservations_Edit(Panel pnl, Reservation editable = null)
         {
             InitializeComponent();
             mainPnl = pnl;
@@ -27,33 +27,33 @@ namespace EcoLease_Admin.UserControls
             fillControls(editable);     
         }
 
-        private void fillControls(Agreement editable = null)
+        private void fillControls(Reservation editable = null)
         {
             cmbStatus.DataSource = new StatusDataAccess().GetAll();
-            cmbUsers.DataSource = new UserDataAccess().GetAll();
+            cmbCustomer.DataSource = new CustomerDataAccess().GetAll();
             cmbVehicles.DataSource = new VehicleDataAccess().GetAll();
 
             if(editable != null)
             {
-                lbID.Text = editable.AId.ToString();
+                lbID.Text = editable.RId.ToString();
                 dtpLeaseBegin.Value = editable.LeaseBegin;
                 dtpLeaseLast.Value = editable.LeaseLast;
                 cmbStatus.SelectedIndex = cmbStatus.FindStringExact(editable.Status);
-                cmbUsers.SelectedIndex = cmbUsers.FindStringExact(editable.User.ToString());
+                cmbCustomer.SelectedIndex = cmbCustomer.FindStringExact(editable.Customer.ToString());
                 cmbVehicles.SelectedIndex = cmbVehicles.FindStringExact(editable.Vehicle.ToString());
                 update = true;
             }
         }
 
-        private Agreement getAgreementObject(bool update=false)
+        private Reservation getReservationObject(bool update=false)
         {
             if (update)
             {
-                return new Agreement(Convert.ToInt32(lbID.Text), dtpLeaseBegin.Value, dtpLeaseLast.Value, cmbStatus.SelectedItem.ToString(), cmbUsers.SelectedItem as User, cmbVehicles.SelectedItem as Vehicle);
+                return new Reservation(Convert.ToInt32(lbID.Text), dtpLeaseBegin.Value, dtpLeaseLast.Value, cmbStatus.SelectedItem.ToString(), cmbCustomer.SelectedItem as Customer, cmbVehicles.SelectedItem as Vehicle);
             }
             else
             {
-            return new Agreement(dtpLeaseBegin.Value, dtpLeaseLast.Value, cmbStatus.SelectedItem.ToString(), cmbUsers.SelectedItem as User, cmbVehicles.SelectedItem as Vehicle);
+            return new Reservation(dtpLeaseBegin.Value, dtpLeaseLast.Value, cmbStatus.SelectedItem.ToString(), cmbCustomer.SelectedItem as Customer, cmbVehicles.SelectedItem as Vehicle);
             }
         }
 
@@ -64,8 +64,8 @@ namespace EcoLease_Admin.UserControls
             {
                 try
                 {
-                    new AgreementDataAccess().Insert(getAgreementObject());
-                    MessageBox.Show($"A new agreement just added!", "Successful Action!, Returning to Dashboard");
+                    new ReservationDataAccess().Insert(getReservationObject());
+                    MessageBox.Show($"A new reservation just added!", "Successful Action!, Returning to Dashboard");
                     //goes back to the dashboard
                     returnToDashboard();
                 }
@@ -79,8 +79,8 @@ namespace EcoLease_Admin.UserControls
             {
                 try
                 {
-                    new AgreementDataAccess().Update(getAgreementObject(true));
-                    MessageBox.Show($"An Agreement with ID: {lbID.Text} just updated!", "Returning to Dashboard");
+                    new ReservationDataAccess().Update(getReservationObject(true));
+                    MessageBox.Show($"An reservation with ID: {lbID.Text} just updated!", "Returning to Dashboard");
                     //goes back to the dashboard
                     returnToDashboard();
                 }
@@ -102,7 +102,9 @@ namespace EcoLease_Admin.UserControls
         private void returnToDashboard()
         {
             mainPnl.Controls.Clear();
-            mainPnl.Controls.Add(new Agreements_Dashboard());
+            mainPnl.Controls.Add(new Reservations_Dashboard
+                
+                ());
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace EcoLease_Admin.UserControls
 {
-    partial class Users
+    partial class Customers
     {
         /// <summary> 
         /// Required designer variable.

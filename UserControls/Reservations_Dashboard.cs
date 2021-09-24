@@ -12,55 +12,55 @@ using System.Windows.Forms;
 
 namespace EcoLease_Admin.UserControls
 {
-    public partial class Agreements_Dashboard : UserControl
+    public partial class Reservations_Dashboard : UserControl
     {
         //create a dataTable for insert data to ADGV
         DataTable dt = new DataTable();
-        List<Agreement> list = new List<Agreement>();
+        List<Reservation> list = new List<Reservation>();
 
         //declared delegate to easily pass data through objects
         //I can see in other objects which is the selected object on the datagridview
-        public delegate void SelectedAgreementChangedEventHandler(object source, Agreement selected);
-        public event SelectedAgreementChangedEventHandler SelectedAgreementChanged;
+        public delegate void SelectedReservationChangedEventHandler(object source, Reservation selected);
+        public event SelectedReservationChangedEventHandler SelectedReservationChanged;
 
-        public Agreements_Dashboard()
+        public Reservations_Dashboard()
         {
             InitializeComponent();
 
             //getting the data and save it locally into a list
-            list = new AgreementDataAccess().GetAll();
+            list = new ReservationDataAccess().GetAll();
             //create and fill dataTable because of ADGV
-            dt = fillDataTable(AgreementDT(), list);
-            dgvAgreements.DataSource = dt;
+            dt = fillDataTable(ReservationDT(), list);
+            dataGridView.DataSource = dt;
         }
 
         //on selected index change
         private void dgvAgreements_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvAgreements.SelectedRows.Count > 0)
+            if (dataGridView.SelectedRows.Count > 0)
             {
-                OnSelectedAgreementChanged(selected(dgvAgreements.SelectedRows[0]));
+                OnSelectedReservationChanged(selected(dataGridView.SelectedRows[0]));
             }
             else
             {
-                OnSelectedAgreementChanged(new Agreement());
+                OnSelectedReservationChanged(new Reservation());
             }
         }
-        protected virtual void OnSelectedAgreementChanged(Agreement selected)
+        protected virtual void OnSelectedReservationChanged(Reservation selected)
         {
-            if (SelectedAgreementChanged != null)
+            if (SelectedReservationChanged != null)
             {
-                SelectedAgreementChanged(this, selected);
+                SelectedReservationChanged(this, selected);
             }
         }
 
         //convert row to object
-        Agreement selected(DataGridViewRow row)
+        Reservation selected(DataGridViewRow row)
         {
-            return list.Find(e => e.AId == (int)row.Cells[0].Value);
+            return list.Find(e => e.RId == (int)row.Cells[0].Value);
         }
 
-        DataTable AgreementDT()
+        DataTable ReservationDT()
         {
             DataTable dt = new DataTable();
 
@@ -68,16 +68,16 @@ namespace EcoLease_Admin.UserControls
             dt.Columns.Add("Lease From", typeof(DateTime));
             dt.Columns.Add("Lease Until", typeof(DateTime));
             dt.Columns.Add("Status", typeof(string));
-            dt.Columns.Add("User", typeof(User));
+            dt.Columns.Add("Customer", typeof(Customer));
             dt.Columns.Add("Vehicle", typeof(Vehicle));
 
             return dt;
         }
-        DataTable fillDataTable(DataTable dt, List<Agreement> agreements)
+        DataTable fillDataTable(DataTable dt, List<Reservation> reservations)
         {
-            foreach (var agr in agreements)
+            foreach (var res in reservations)
             {
-                dt.Rows.Add(agr.AId, agr.LeaseBegin, agr.LeaseLast, agr.Status, agr.User, agr.Vehicle);
+                dt.Rows.Add(res.RId, res.LeaseBegin, res.LeaseLast, res.Status, res.Customer, res.Vehicle);
             }
             return dt;
         }
@@ -85,12 +85,12 @@ namespace EcoLease_Admin.UserControls
         //filtering and sorting config
         private void dgvAgreements_FilterStringChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = dgvAgreements.FilterString;
+            dt.DefaultView.RowFilter = dataGridView.FilterString;
         }
 
         private void dgvAgreements_SortStringChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.Sort = dgvAgreements.SortString;
+            dt.DefaultView.Sort = dataGridView.SortString;
         }
     }
 }

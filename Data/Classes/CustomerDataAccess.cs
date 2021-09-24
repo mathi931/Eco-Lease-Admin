@@ -9,18 +9,18 @@ using static EcoLease_Admin.Data.Classes.DataAccessHelper;
 
 namespace EcoLease_Admin.Data
 {
-    class UserDataAccess : IUserHandler
+    class CustomerDataAccess : ICustomerHandler
     {
-        //gets and returns all users
-        public List<User> GetAll()
+        //gets and returns all customers
+        public List<Customer> GetAll()
         {
             try
             {
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown 
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
-                    //runs and returns a list of users from the executed query
-                    return connection.Query<User>($"SELECT * FROM Users").ToList();
+                    //runs and returns a list of customers from the executed query
+                    return connection.Query<Customer>($"SELECT * FROM Customers").ToList();
                 }
             }
             catch (SqlException exp)
@@ -30,13 +30,13 @@ namespace EcoLease_Admin.Data
             }
         }
 
-        //inserts a new user
-        public void Insert(User user)
+        //inserts a new customer
+        public void Insert(Customer user)
         {
             try
             {
-                //query for insert a new user
-                var sql = @"INSERT INTO Users (firstName, lastName, dateOfBirth) 
+                //query for insert a new customer
+                var sql = @"INSERT INTO Customers (firstName, lastName, dateOfBirth) 
                                    VALUES(@firstName, @lastName, @dateOfBirth)";
 
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
@@ -53,13 +53,13 @@ namespace EcoLease_Admin.Data
             }
         }
 
-        //removes a user
-        public void Remove(User user)
+        //removes a customer
+        public void Remove(Customer user)
         {
             try
             {
-                //query to remove a user by ID
-                var query = @"DELETE FROM Users WHERE uID = @uid";
+                //query to remove a customer by ID
+                var query = @"DELETE FROM Customers WHERE cID = @cid";
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
@@ -74,13 +74,13 @@ namespace EcoLease_Admin.Data
             }
         }
 
-        //updates a user
-        public void Update(User user)
+        //updates a customer
+        public void Update(Customer user)
         {
             try
             {
-                //query for update a user by id
-                var sql = @"update Users SET firstName = @firstName, lastName = @lastName, dateOfBirth = @dateOfBirth WHERE uID = @uid";
+                //query for update a customer by id
+                var sql = @"update Customers SET firstName = @firstName, lastName = @lastName, dateOfBirth = @dateOfBirth WHERE cID = @cid";
 
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))

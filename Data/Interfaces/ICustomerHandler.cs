@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace EcoLease_Admin.Data
 {
-    interface IUserHandler
+    interface ICustomerHandler
     {
         //CRUD
-        List<User> GetAll();
-        void Insert(User user);
-        void Update(User user);
-        void Remove(User user);
+        List<Customer> GetAll();
+        void Insert(Customer customer);
+        void Update(Customer customer);
+        void Remove(Customer customer);
     }
 }

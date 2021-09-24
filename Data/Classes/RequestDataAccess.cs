@@ -16,10 +16,10 @@ namespace EcoLease_Admin.Data
         public List<Request> GetAll()
         {
             //query to get the request objects
-            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, st.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name as status, v.img 
+            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, st.name as status, u.cID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, s.name as status, v.img 
                             FROM Requests re
                             LEFT JOIN Statuses st ON re.statusID = st.sID
-                            INNER JOIN Users u ON re.userID = u.uID
+                            INNER JOIN Customers u ON re.userID = u.cID
                             INNER JOIN Vehicles v ON re.vehicleID = v.vID
                             INNER JOIN Statuses s ON v.statusID = s.sID;";
 
@@ -30,13 +30,13 @@ namespace EcoLease_Admin.Data
                 {
                     //runs the query with mapping: the query result contains 3 objects, with mapping it returns only the Request objects as a list what contains the other 2 objects
                     //splitOn where the other two table begins (ID`s) -> this slices the query so able to map the slices to different objects
-                    var requests = connection.Query<Request, User, Vehicle, Request>(query,(request, user, vehicle) => 
+                    var requests = connection.Query<Request, Customer, Vehicle, Request>(query,(request, user, vehicle) => 
                         {
                             request.User = user;
                             request.Vehicle = vehicle;
                             return request;
                         },
-                        splitOn: "uID, vID")
+                        splitOn: "cID, vID")
                         .Distinct();
                     return requests.ToList();
                 }
@@ -52,10 +52,10 @@ namespace EcoLease_Admin.Data
         public List<Request> GetByStatus(string status)
         {
             //query to get the request object
-            string query = @"SELECT re.rID, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, st.name as status
+            string query = @"SELECT re.rID, s.name as status, u.cID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, st.name as status
                             FROM Requests re
                             LEFT JOIN Statuses st ON re.statusID = st.sID
-                            INNER JOIN Users u ON re.userID = u.uID
+                            INNER JOIN Customers u ON re.userID = u.cID
                             INNER JOIN Vehicles v ON re.vehicleID = v.vID
                             INNER JOIN Statuses s ON v.statusID = s.sID";
 
@@ -66,13 +66,13 @@ namespace EcoLease_Admin.Data
                 {
                     //runs the query with mapping: the query result contains 3 objects, with mapping it returns only the Request objects as a list what contains the other 2 objects
                     //splitOn where the other two table begins (ID`s) -> this slices the query so able to map the slices to different objects
-                    var requests = connection.Query<Request, User, Vehicle, Request>(query, (request, user, vehicle) =>
+                    var requests = connection.Query<Request, Customer, Vehicle, Request>(query, (request, user, vehicle) =>
                     {
                         request.User = user;
                         request.Vehicle = vehicle;
                         return request;
                     },
-                        splitOn: "uID, vID")
+                        splitOn: "cID, vID")
                         .Distinct();
                     //returns the list where the status matches
                     return requests.Where(r => r.Status == status).ToList();

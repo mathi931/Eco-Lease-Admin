@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace EcoLease_Admin.Models
 {
-    public class User
+    public class Customer
     {
         //props
-        public int UId { get; set; }
+        public int CId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -37,7 +37,7 @@ namespace EcoLease_Admin.Models
 
 
         //create
-        public User(string firstName, string lastName, DateTime dateOfBirth)
+        public Customer(string firstName, string lastName, DateTime dateOfBirth)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -45,15 +45,15 @@ namespace EcoLease_Admin.Models
         }
 
         //read, update, delete
-        public User(int uid, string firstName, string lastName, DateTime dateOfBirth)
+        public Customer(int uid, string firstName, string lastName, DateTime dateOfBirth)
         {
-            UId = uid;
+            CId = uid;
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
         }
 
-        public User()
+        public Customer()
         {
         }
 

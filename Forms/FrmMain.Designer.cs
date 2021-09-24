@@ -31,7 +31,7 @@ namespace EcoLease_Admin
         {
             this.btnDashboard = new System.Windows.Forms.Button();
             this.btnVehicles = new System.Windows.Forms.Button();
-            this.btnAgreements = new System.Windows.Forms.Button();
+            this.btnReservations = new System.Windows.Forms.Button();
             this.btnRequests = new System.Windows.Forms.Button();
             this.container = new System.Windows.Forms.Panel();
             this.output = new System.Windows.Forms.Label();
@@ -58,15 +58,15 @@ namespace EcoLease_Admin
             this.btnVehicles.UseVisualStyleBackColor = true;
             this.btnVehicles.Click += new System.EventHandler(this.btnVehicles_Click);
             // 
-            // btnAgreements
+            // btnReservations
             // 
-            this.btnAgreements.Location = new System.Drawing.Point(12, 317);
-            this.btnAgreements.Name = "btnAgreements";
-            this.btnAgreements.Size = new System.Drawing.Size(175, 50);
-            this.btnAgreements.TabIndex = 2;
-            this.btnAgreements.Text = "Agreements";
-            this.btnAgreements.UseVisualStyleBackColor = true;
-            this.btnAgreements.Click += new System.EventHandler(this.btnAgreements_Click);
+            this.btnReservations.Location = new System.Drawing.Point(12, 317);
+            this.btnReservations.Name = "btnReservations";
+            this.btnReservations.Size = new System.Drawing.Size(175, 50);
+            this.btnReservations.TabIndex = 2;
+            this.btnReservations.Text = "Reservations";
+            this.btnReservations.UseVisualStyleBackColor = true;
+            this.btnReservations.Click += new System.EventHandler(this.btnAgreements_Click);
             // 
             // btnRequests
             // 
@@ -100,7 +100,7 @@ namespace EcoLease_Admin
             this.ClientSize = new System.Drawing.Size(1264, 761);
             this.Controls.Add(this.container);
             this.Controls.Add(this.btnRequests);
-            this.Controls.Add(this.btnAgreements);
+            this.Controls.Add(this.btnReservations);
             this.Controls.Add(this.btnVehicles);
             this.Controls.Add(this.btnDashboard);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -121,7 +121,7 @@ namespace EcoLease_Admin
 
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Button btnVehicles;
-        private System.Windows.Forms.Button btnAgreements;
+        private System.Windows.Forms.Button btnReservations;
         private System.Windows.Forms.Button btnRequests;
         private System.Windows.Forms.Panel container;
         private System.Windows.Forms.Label output;

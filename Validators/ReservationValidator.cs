@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EcoLease_Admin.Validators
 {
-    class AgreementValidator
+    class ReservationValidator
     {
     }
 }

@@ -6,39 +6,39 @@ using System.Threading.Tasks;
 
 namespace EcoLease_Admin.Models
 {
-    public class Agreement
+    public class Reservation
     {
-        public Agreement() { }
-        public Agreement(int aId, DateTime leaseBegin, DateTime leaseLast, string status, User user, Vehicle vehicle)
+        public Reservation() { }
+        public Reservation(int id, DateTime leaseBegin, DateTime leaseLast, string status, Customer user, Vehicle vehicle)
         {
-            AId = aId;
+            RId = id;
             LeaseBegin = leaseBegin;
             LeaseLast = leaseLast;
             Status = status;
-            User = user;
+            Customer = user;
             Vehicle = vehicle;
         }
-        public Agreement(DateTime leaseBegin, DateTime leaseLast, string status, User user, Vehicle vehicle)
+        public Reservation(DateTime leaseBegin, DateTime leaseLast, string status, Customer user, Vehicle vehicle)
         {
             LeaseBegin = leaseBegin;
             LeaseLast = leaseLast;
             Status = status;
-            User = user;
+            Customer = user;
             Vehicle = vehicle;
         }
 
         //Object to string
         public override string ToString()
         {
-            return $"{User} rented {Vehicle} ({LeaseBegin} - {LeaseLast}) ";
+            return $"{Customer} rented {Vehicle} ({LeaseBegin} - {LeaseLast}) ";
         }
 
         //props
-        public int AId { get; set; }
+        public int RId { get; set; }
         public DateTime LeaseBegin { get; set; }
         public DateTime LeaseLast { get; set; }
         public string Status { get; set; }
-        public User User { get; set; }
+        public Customer Customer { get; set; }
         public Vehicle Vehicle { get; set; }
     }
     

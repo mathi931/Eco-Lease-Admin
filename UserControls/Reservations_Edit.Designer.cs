@@ -1,7 +1,7 @@
 ﻿
 namespace EcoLease_Admin.UserControls
 {
-    partial class Agreements_Edit
+    partial class Reservations_Edit
     {
         /// <summary> 
         /// Required designer variable.
@@ -37,7 +37,7 @@ namespace EcoLease_Admin.UserControls
             this.label2 = new System.Windows.Forms.Label();
             this.dtpLeaseBegin = new System.Windows.Forms.DateTimePicker();
             this.dtpLeaseLast = new System.Windows.Forms.DateTimePicker();
-            this.cmbUsers = new System.Windows.Forms.ComboBox();
+            this.cmbCustomer = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbVehicles = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -119,24 +119,24 @@ namespace EcoLease_Admin.UserControls
             this.dtpLeaseLast.Size = new System.Drawing.Size(245, 20);
             this.dtpLeaseLast.TabIndex = 40;
             // 
-            // cmbUsers
+            // cmbCustomer
             // 
-            this.cmbUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbUsers.FormattingEnabled = true;
-            this.cmbUsers.Location = new System.Drawing.Point(170, 277);
-            this.cmbUsers.Name = "cmbUsers";
-            this.cmbUsers.Size = new System.Drawing.Size(246, 32);
-            this.cmbUsers.TabIndex = 42;
+            this.cmbCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCustomer.FormattingEnabled = true;
+            this.cmbCustomer.Location = new System.Drawing.Point(170, 277);
+            this.cmbCustomer.Name = "cmbCustomer";
+            this.cmbCustomer.Size = new System.Drawing.Size(246, 32);
+            this.cmbCustomer.TabIndex = 42;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(89, 283);
+            this.label4.Location = new System.Drawing.Point(54, 283);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 20);
+            this.label4.Size = new System.Drawing.Size(78, 20);
             this.label4.TabIndex = 41;
-            this.label4.Text = "User";
+            this.label4.Text = "Customer";
             // 
             // cmbVehicles
             // 
@@ -167,13 +167,13 @@ namespace EcoLease_Admin.UserControls
             this.lbID.Size = new System.Drawing.Size(0, 24);
             this.lbID.TabIndex = 45;
             // 
-            // Agreements_Edit
+            // Reservations_Edit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.lbID);
             this.Controls.Add(this.cmbVehicles);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.cmbUsers);
+            this.Controls.Add(this.cmbCustomer);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dtpLeaseLast);
             this.Controls.Add(this.dtpLeaseBegin);
@@ -183,7 +183,7 @@ namespace EcoLease_Admin.UserControls
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Name = "Agreements_Edit";
+            this.Name = "Reservations_Edit";
             this.Size = new System.Drawing.Size(919, 754);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -200,7 +200,7 @@ namespace EcoLease_Admin.UserControls
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpLeaseBegin;
         private System.Windows.Forms.DateTimePicker dtpLeaseLast;
-        private System.Windows.Forms.ComboBox cmbUsers;
+        private System.Windows.Forms.ComboBox cmbCustomer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbVehicles;
         private System.Windows.Forms.Label label5;

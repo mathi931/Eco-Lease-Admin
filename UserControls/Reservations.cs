@@ -12,35 +12,35 @@ using System.Windows.Forms;
 
 namespace EcoLease_Admin.UserControls
 {
-    public partial class Agreements : UserControl
+    public partial class Reservations : UserControl
     {
-        Agreement selected = new Agreement();
+        Reservation selected = new Reservation();
 
-        public Agreements()
+        public Reservations()
         {
             InitializeComponent();
             showPanel();
         }
 
-        private void showPanel(byte i = 0, Agreement passed = null)
+        private void showPanel(byte i = 0, Reservation passed = null)
         {
             switch (i)
             {   //show dashboard - default
                 case 0:
-                    Agreements_Dashboard dashboard = new Agreements_Dashboard();
-                    dashboard.SelectedAgreementChanged += this.OnSelectedAgreementChanged;
+                    Reservations_Dashboard dashboard = new Reservations_Dashboard();
+                    dashboard.SelectedReservationChanged += this.OnSelectedAgreementChanged;
                     container.Controls.Clear();
                     container.Controls.Add(dashboard);
                     break;
                 //add new agr -option 1
                 case 1:
                     container.Controls.Clear();
-                    container.Controls.Add(new Agreements_Edit(container));
+                    container.Controls.Add(new Reservations_Edit(container));
                     break;
                 //edit agr -option 2
                 case 2:
                     container.Controls.Clear();
-                    container.Controls.Add(new Agreements_Edit(container, passed));
+                    container.Controls.Add(new Reservations_Edit(container, passed));
                     break;
                 default:
                     MessageBox.Show("Error!");
@@ -76,15 +76,15 @@ namespace EcoLease_Admin.UserControls
             {
                 MessageBox.Show("Please select a contract first to remove!");
             }
-            else if (selected != null && MessageBox.Show($"Are you sure to delete {selected.User} with ID: {selected.AId} ?", "Removing Contract", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+            else if (selected != null && MessageBox.Show($"Are you sure to delete {selected.Customer} with ID: {selected.RId} ?", "Removing Contract", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
             {
 
-                new AgreementDataAccess().Remove(selected);
+                new ReservationDataAccess().Remove(selected);
                 showPanel();
             }
         }
 
-        public void OnSelectedAgreementChanged(object source, Agreement selectedV)
+        public void OnSelectedAgreementChanged(object source, Reservation selectedV)
         {
             this.selected = selectedV;
             //Console.WriteLine(selected);

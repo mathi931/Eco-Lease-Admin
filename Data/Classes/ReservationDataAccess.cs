@@ -10,17 +10,17 @@ using static EcoLease_Admin.Data.Classes.DataAccessHelper;
 
 namespace EcoLease_Admin.Data
 {
-    class AgreementDataAccess : IAgreementHandler
+    class ReservationDataAccess : IReservationHandler
     {
-        //gets all the agreements
-        public List<Agreement> GetAll()
+        //gets all the Reservations
+        public List<Reservation> GetAll()
         {
-            //query to get the agreement objects
-            string query = @"SELECT ag.aID, ag.leaseBegin, ag.leaseLast, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
-                            FROM Agreements ag
-                            LEFT JOIN Statuses s ON ag.statusID = s.sID
-                            INNER JOIN Users u ON ag.userID = u.uID
-                            INNER JOIN Vehicles v ON ag.vehicleID = v.vID
+            //query to get the reservation objects
+            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, s.name as status, c.cID, c.firstName, c.lastName, c.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
+                            FROM Reservations re
+                            LEFT JOIN Statuses s ON re.statusID = s.sID
+                            INNER JOIN Customers c ON re.customerID = c.cID
+                            INNER JOIN Vehicles v ON re.vehicleID = v.vID
                             INNER JOIN Statuses st ON v.statusID = st.sID;";
 
             try
@@ -30,15 +30,15 @@ namespace EcoLease_Admin.Data
                 {
                     //runs the query with mapping: the query result contains 3 objects, with mapping it returns only the Request objects as a list what contains the other 2 objects
                     //splitOn where the other two table begins (ID`s) -> this slices the query so able to map the slices to different objects
-                    var agreements = connection.Query<Agreement, User, Vehicle, Agreement>(query, (agreement, user, vehicle) =>
+                    var reservations = connection.Query<Reservation, Customer, Vehicle, Reservation>(query, (reservation, customer, vehicle) =>
                     {
-                        agreement.User = user;
-                        agreement.Vehicle = vehicle;
-                        return agreement;
+                        reservation.Customer = customer;
+                        reservation.Vehicle = vehicle;
+                        return reservation;
                     },
-                        splitOn: "uID, vID")
+                        splitOn: "cID, vID")
                         .Distinct();
-                    return agreements.ToList();
+                    return reservations.ToList();
                 }
             }
             catch (SqlException exp)
@@ -48,14 +48,14 @@ namespace EcoLease_Admin.Data
             }
         }
 
-        public Agreement GetByID(int id)
+        public Reservation GetByID(int id)
         {
-            //query to get the agreement object
-            string query = @"SELECT ag.aID, ag.leaseBegin, ag.leaseLast, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
-                            FROM Agreements ag
-                            LEFT JOIN Statuses s ON ag.statusID = s.sID
-                            INNER JOIN Users u ON ag.userID = u.uID
-                            INNER JOIN Vehicles v ON ag.vehicleID = v.vID
+            //query to get the reservation object
+            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, s.name as status, c.cID, c.firstName, c.lastName, c.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
+                            FROM Reservations re
+                            LEFT JOIN Statuses s ON re.statusID = s.sID
+                            INNER JOIN Customers c ON re.customerID = c.cID
+                            INNER JOIN Vehicles v ON re.vehicleID = v.vID
                             INNER JOIN Statuses st ON v.statusID = st.sID;";
 
             try
@@ -65,15 +65,15 @@ namespace EcoLease_Admin.Data
                 {
                     //runs the query with mapping: the query result contains 3 objects, with mapping it returns only the Request objects as a list what contains the other 2 objects
                     //splitOn where the other two table begins (ID`s) -> this slices the query so able to map the slices to different objects
-                    var agreements = connection.Query<Agreement, User, Vehicle, Agreement>(query, (agreement, user, vehicle) =>
+                    var reservations = connection.Query<Reservation, Customer, Vehicle, Reservation>(query, (reservation, customer, vehicle) =>
                     {
-                        agreement.User = user;
-                        agreement.Vehicle = vehicle;
-                        return agreement;
+                        reservation.Customer = customer;
+                        reservation.Vehicle = vehicle;
+                        return reservation;
                     },
-                        splitOn: "uID, vID")
+                        splitOn: "cID, vID")
                         .Distinct();
-                    return agreements.Where(x => x.AId == id) as Agreement;
+                    return reservations.Where(x => x.RId == id) as Reservation;
                 }
             }
             catch (SqlException exp)
@@ -83,13 +83,13 @@ namespace EcoLease_Admin.Data
             }
         }
 
-        async public void Insert(Agreement agreement)
+        async public void Insert(Reservation reservation)
         {
             //sql query for get the status id
             string queryGetID = @"SELECT s.sID from Statuses as s WHERE s.name = @status";
 
             //sql query for insert the new vehicle
-            string queryInsert = @"INSERT INTO Agreements (leaseBegin, leaseLast, statusID, userID, vehicleID) values(@lBegin, @lLast, @statusID, @userID, @vehicleID)";
+            string queryInsert = @"INSERT INTO Reservations (leaseBegin, leaseLast, statusID, customerID, vehicleID) values(@lBegin, @lLast, @statusID, @customerID, @vehicleID)";
 
             try
             {
@@ -97,15 +97,15 @@ namespace EcoLease_Admin.Data
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
                     //gets and saves the id locally with async function
-                    int sID = await connection.ExecuteScalarAsync<int>(queryGetID, new { status = agreement.Status });
+                    int sID = await connection.ExecuteScalarAsync<int>(queryGetID, new { status = reservation.Status });
 
                     //creates the new object with status id
                     var a = new
-                    {   lBegin = agreement.LeaseBegin,
-                        lLast = agreement.LeaseLast,
+                    {   lBegin = reservation.LeaseBegin,
+                        lLast = reservation.LeaseLast,
                         statusID = sID,
-                        userID = agreement.User.UId,
-                        vehicleID = agreement.Vehicle.VId
+                        customerID = reservation.Customer.CId,
+                        vehicleID = reservation.Vehicle.VId
                     };
                     //inserts the new object into the vehicles table
                     connection.Execute(queryInsert, a);
@@ -118,18 +118,18 @@ namespace EcoLease_Admin.Data
             }
         }
 
-        public void Remove(Agreement agreement)
+        public void Remove(Reservation reservation)
         {
             try
             {
-                //query for remove the agreement
-                string query = @"DELETE FROM Agreements WHERE aID = @aid";
+                //query for remove the reservation
+                string query = @"DELETE FROM Reservations WHERE rID = @rID";
 
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
                     //runs the query with the passed object
-                    connection.Execute(query, agreement);
+                    connection.Execute(query, reservation);
                 }
             }
             catch (SqlException exp)
@@ -139,15 +139,15 @@ namespace EcoLease_Admin.Data
             }
         }
 
-        public void Update(Agreement agreement)
+        public void Update(Reservation reservation)
         {
-            //query for update dates, status, vehicle id (user can not change)
-            string query = @"UPDATE Agreements
+            //query for update dates, status, vehicle id (customer can not change)
+            string query = @"UPDATE Reservations
                             SET statusID = (SELECT sID FROM Statuses WHERE name = @status),
 	                            vehicleID = @vID,
                                 leaseBegin = @lBegin,
                                 leaseLast = @lLast
-                            WHERE aID = @aID;";
+                            WHERE rID = @rID;";
             try
             {
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
@@ -156,11 +156,11 @@ namespace EcoLease_Admin.Data
                     //runs the query with a new object what contains the needed variables
                     var a = new
                     {
-                        status = agreement.Status,
-                        vID = agreement.Vehicle.VId,
-                        lBegin = agreement.LeaseBegin,
-                        lLast = agreement.LeaseLast,
-                        aID = agreement.AId
+                        status = reservation.Status,
+                        vID = reservation.Vehicle.VId,
+                        lBegin = reservation.LeaseBegin,
+                        lLast = reservation.LeaseLast,
+                        rID = reservation.RId
                     };
                     connection.Execute(query, a);
                 }

@@ -50,7 +50,7 @@ namespace EcoLease_Admin
 
         private void btnAgreements_Click(object sender, EventArgs e)
         {
-            Agreements agreements = new Agreements();
+            Reservations agreements = new Reservations();
             showControl(this.container, agreements);
         }
 

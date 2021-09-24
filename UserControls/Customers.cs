@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace EcoLease_Admin.UserControls
 {
-    public partial class Users : UserControl
+    public partial class Customers : UserControl
     {
-        public Users()
+        public Customers()
         {
             InitializeComponent();
         }
