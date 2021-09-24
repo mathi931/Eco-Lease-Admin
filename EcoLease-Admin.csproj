@@ -163,6 +163,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\Agreements.resx">
+      <DependentUpon>Agreements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Agreements_Dashboard.resx">
+      <DependentUpon>Agreements_Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Agreements_Edit.resx">
+      <DependentUpon>Agreements_Edit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Main_Dashboard.resx">
       <DependentUpon>Main_Dashboard.cs</DependentUpon>
     </EmbeddedResource>

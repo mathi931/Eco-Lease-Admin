@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EcoLease_Admin.Models
 {
-    class User
+    public class User
     {
         //props
         public int UId { get; set; }

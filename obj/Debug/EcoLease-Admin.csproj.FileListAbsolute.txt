@@ -23,3 +23,6 @@ C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\ru\AdvancedDataGridView.res
 C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\FluentValidation.dll
 C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\FluentValidation.xml
 C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Requests.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Agreements.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Agreements_Dashboard.resources
+C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Agreements_Edit.resources

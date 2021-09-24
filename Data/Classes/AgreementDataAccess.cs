@@ -18,10 +18,10 @@ namespace EcoLease_Admin.Data
             //query to get the agreement objects
             string query = @"SELECT ag.aID, ag.leaseBegin, ag.leaseLast, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
                             FROM Agreements ag
-                            LEFT JOIN Statuses st ON ag.statusID = st.sID
+                            LEFT JOIN Statuses s ON ag.statusID = s.sID
                             INNER JOIN Users u ON ag.userID = u.uID
                             INNER JOIN Vehicles v ON ag.vehicleID = v.vID
-                            INNER JOIN Statuses s ON v.statusID = s.sID;";
+                            INNER JOIN Statuses st ON v.statusID = st.sID;";
 
             try
             {
@@ -53,10 +53,10 @@ namespace EcoLease_Admin.Data
             //query to get the agreement object
             string query = @"SELECT ag.aID, ag.leaseBegin, ag.leaseLast, s.name as status, u.uID, u.firstName, u.lastName, u.dateOfBirth, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
                             FROM Agreements ag
-                            LEFT JOIN Statuses st ON ag.statusID = st.sID
+                            LEFT JOIN Statuses s ON ag.statusID = s.sID
                             INNER JOIN Users u ON ag.userID = u.uID
                             INNER JOIN Vehicles v ON ag.vehicleID = v.vID
-                            INNER JOIN Statuses s ON v.statusID = s.sID;";
+                            INNER JOIN Statuses st ON v.statusID = st.sID;";
 
             try
             {
@@ -89,7 +89,7 @@ namespace EcoLease_Admin.Data
             string queryGetID = @"SELECT s.sID from Statuses as s WHERE s.name = @status";
 
             //sql query for insert the new vehicle
-            string queryInsert = @"INSERT INTO Agreements (leaseBegin, leastLast, statusID, userID, vehicleID) values(@lBegin, @lLast, @statusID, @userID, @vehicleID)";
+            string queryInsert = @"INSERT INTO Agreements (leaseBegin, leaseLast, statusID, userID, vehicleID) values(@lBegin, @lLast, @statusID, @userID, @vehicleID)";
 
             try
             {

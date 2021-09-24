@@ -6,8 +6,27 @@ using System.Threading.Tasks;
 
 namespace EcoLease_Admin.Models
 {
-    class Agreement
+    public class Agreement
     {
+        public Agreement() { }
+        public Agreement(int aId, DateTime leaseBegin, DateTime leaseLast, string status, User user, Vehicle vehicle)
+        {
+            AId = aId;
+            LeaseBegin = leaseBegin;
+            LeaseLast = leaseLast;
+            Status = status;
+            User = user;
+            Vehicle = vehicle;
+        }
+        public Agreement(DateTime leaseBegin, DateTime leaseLast, string status, User user, Vehicle vehicle)
+        {
+            LeaseBegin = leaseBegin;
+            LeaseLast = leaseLast;
+            Status = status;
+            User = user;
+            Vehicle = vehicle;
+        }
+
         //Object to string
         public override string ToString()
         {

@@ -17,12 +17,10 @@ namespace EcoLease_Admin
 {
     public partial class FrmMain : Form
     {
-        List<User> u = new List<User>();
         public FrmMain()
         {
             InitializeComponent();
         }
-
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
@@ -52,7 +50,8 @@ namespace EcoLease_Admin
 
         private void btnAgreements_Click(object sender, EventArgs e)
         {
-
+            Agreements agreements = new Agreements();
+            showControl(this.container, agreements);
         }
 
         private void btnRequests_Click(object sender, EventArgs e)

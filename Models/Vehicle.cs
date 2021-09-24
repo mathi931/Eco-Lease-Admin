@@ -50,7 +50,7 @@ namespace EcoLease_Admin.Models
         //object to string
         public override string ToString()
         {
-            return $"{Make} {Model} {Registered} {PlateNo} {Km}{Notes} {Status}"; 
+            return $" {VId} - {Make} {Model}"; 
         }
 
     }
