@@ -112,11 +112,11 @@
     </Compile>
     <Compile Include="UserControls\Methods\DataGridViewMethods.cs" />
     <Compile Include="UserControls\Methods\DataTableExtensions.cs" />
-    <Compile Include="UserControls\Main_Dashboard.cs">
+    <Compile Include="UserControls\Dashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Main_Dashboard.Designer.cs">
-      <DependentUpon>Main_Dashboard.cs</DependentUpon>
+    <Compile Include="UserControls\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Methods\MessageBoxes.cs" />
     <Compile Include="UserControls\Requests.cs">
@@ -163,6 +163,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\Customers.resx">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Reservations.resx">
       <DependentUpon>Reservations.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,8 +175,8 @@
     <EmbeddedResource Include="UserControls\Reservations_Edit.resx">
       <DependentUpon>Reservations_Edit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Main_Dashboard.resx">
-      <DependentUpon>Main_Dashboard.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Requests.resx">
       <DependentUpon>Requests.cs</DependentUpon>

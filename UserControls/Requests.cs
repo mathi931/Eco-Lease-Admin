@@ -21,18 +21,18 @@ namespace EcoLease_Admin.UserControls
         {
             InitializeComponent();
             requests = new RequestDataAccess().GetAll();
-            createViews();
+            createViews(dgvRequests);
             fillRequests(requests);
         }
 
-        private void createViews()
+        private void createViews(DataGridView dgv)
         {
-            dgvRequests.Columns.Add("id", "ID");
-            dgvRequests.Columns.Add("leaseFrom", "Lease From");
-            dgvRequests.Columns.Add("leaseLast", "Lease Until");
-            dgvRequests.Columns.Add("status", "Status");
-            dgvRequests.Columns.Add("user", "Customer");
-            dgvRequests.Columns.Add("vehicle", "Vehicle");
+            dgv.Columns.Add("id", "ID");
+            dgv.Columns.Add("leaseFrom", "Lease From");
+            dgv.Columns.Add("leaseLast", "Lease Until");
+            dgv.Columns.Add("status", "Status");
+            dgv.Columns.Add("user", "Customer");
+            dgv.Columns.Add("vehicle", "Vehicle");
 
         }
         private void fillRequests(List<Request> r)

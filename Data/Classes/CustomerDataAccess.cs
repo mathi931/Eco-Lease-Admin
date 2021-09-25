@@ -64,7 +64,7 @@ namespace EcoLease_Admin.Data
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
                 {
                     //runs the query
-                    connection.Execute(query, user);
+                    connection.Execute(query, new { cid = user.CId});
                 }
             }
             catch (SqlException exp)

@@ -24,7 +24,7 @@ namespace EcoLease_Admin
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            Main_Dashboard dashboard = new Main_Dashboard();
+            Dashboard dashboard = new Dashboard();
             showControl(this.container, dashboard);
         }
         public void showControl(Panel container, Control control)
@@ -38,7 +38,7 @@ namespace EcoLease_Admin
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            Main_Dashboard dashboard = new Main_Dashboard();
+            Dashboard dashboard = new Dashboard();
             showControl(this.container, dashboard);
         }
 
@@ -58,6 +58,12 @@ namespace EcoLease_Admin
         {
             Requests requests = new Requests();
             showControl(this.container, requests);
+        }
+
+        private void btnCustomers_Click(object sender, EventArgs e)
+        {
+            Customers customers = new Customers();
+            showControl(this.container, customers);
         }
     }
 }

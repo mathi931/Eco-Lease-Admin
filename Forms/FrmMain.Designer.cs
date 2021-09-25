@@ -35,6 +35,7 @@ namespace EcoLease_Admin
             this.btnRequests = new System.Windows.Forms.Button();
             this.container = new System.Windows.Forms.Panel();
             this.output = new System.Windows.Forms.Label();
+            this.btnCustomers = new System.Windows.Forms.Button();
             this.container.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,10 +95,21 @@ namespace EcoLease_Admin
             this.output.Size = new System.Drawing.Size(0, 20);
             this.output.TabIndex = 1;
             // 
+            // btnCustomers
+            // 
+            this.btnCustomers.Location = new System.Drawing.Point(12, 492);
+            this.btnCustomers.Name = "btnCustomers";
+            this.btnCustomers.Size = new System.Drawing.Size(175, 50);
+            this.btnCustomers.TabIndex = 5;
+            this.btnCustomers.Text = "Customers";
+            this.btnCustomers.UseVisualStyleBackColor = true;
+            this.btnCustomers.Click += new System.EventHandler(this.btnCustomers_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1264, 761);
+            this.Controls.Add(this.btnCustomers);
             this.Controls.Add(this.container);
             this.Controls.Add(this.btnRequests);
             this.Controls.Add(this.btnReservations);
@@ -125,5 +137,6 @@ namespace EcoLease_Admin
         private System.Windows.Forms.Button btnRequests;
         private System.Windows.Forms.Panel container;
         private System.Windows.Forms.Label output;
+        private System.Windows.Forms.Button btnCustomers;
     }
 }
