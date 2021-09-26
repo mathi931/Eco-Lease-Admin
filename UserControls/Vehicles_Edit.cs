@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static EcoLease_Admin.UserControls.Methods.MessageBoxes;
+using static EcoLease_Admin.Data.Classes.DataAccessHelper;
 
 namespace EcoLease_Admin.UserControls
 {
@@ -15,14 +16,12 @@ namespace EcoLease_Admin.UserControls
     {
         Panel mainPnl;
         bool update = false;
-        string imagePath = "";
 
         public Vehicles_Edit()
         {
             InitializeComponent();
             cmbStatus.DataSource = new StatusDataAccess().GetAll();
             numYear.Maximum = DateTime.Now.Year;
-            imagePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\Resources\\";
         }
 
         public Vehicles_Edit(Panel pnl, Vehicle editable = null) : this()
@@ -30,7 +29,7 @@ namespace EcoLease_Admin.UserControls
             mainPnl = pnl;
             if (editable != null)
             {
-                fillControls(editable, imagePath);
+                fillControls(editable, LocalHDDPath());
                 update = true;
             }
         }
@@ -57,7 +56,7 @@ namespace EcoLease_Admin.UserControls
                 try
                 {
                     //save image locally
-                    saveImage(imagePath);
+                    saveImage(LocalHDDPath());
                     new VehicleDataAccess().Insert(createVehicle());
                     MessageBox.Show($"A new vehicle with plate number: {txbPlateNo.Text} just added!", "Successful Action!, Returning to Dashboard");
                     //goes back to the dashboard
@@ -74,7 +73,7 @@ namespace EcoLease_Admin.UserControls
                 try
                 {
                     //save image locally
-                    saveImage(imagePath);
+                    saveImage(LocalHDDPath());
                     new VehicleDataAccess().Update(createVehicle());
                     MessageBox.Show($"A vehicle with plate number: {txbPlateNo.Text} just updated!", "Returning to Dashboard");
                     //goes back to the dashboard
@@ -92,10 +91,10 @@ namespace EcoLease_Admin.UserControls
             //gets the new name
             string fileName = getNewImageName();
             //creates the full path what is in the resources folder with the new file name
-            string fullPath = imagePath + fileName;
+            string fullPath = imgPath + fileName;
 
             //if there is img and not in the folder yet
-            if (!String.IsNullOrEmpty(picBox.ImageLocation) && !fileExist(imagePath, picBox.ImageLocation))
+            if (!String.IsNullOrEmpty(picBox.ImageLocation) && !fileExist(imgPath, picBox.ImageLocation))
             {
                 //copies the uploaded image to local directory with new file name
                 File.Copy(picBox.ImageLocation, fullPath);
@@ -104,7 +103,7 @@ namespace EcoLease_Admin.UserControls
                 lbIMG.Text = fileName;
             }
             //if there is image but the folder already contains it
-            else if (!String.IsNullOrEmpty(picBox.ImageLocation) && fileExist(imagePath, picBox.ImageLocation))
+            else if (!String.IsNullOrEmpty(picBox.ImageLocation) && fileExist(imgPath, picBox.ImageLocation))
             {
 
                 lbIMG.Text = fileName;
