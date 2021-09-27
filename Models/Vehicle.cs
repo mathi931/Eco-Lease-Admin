@@ -31,8 +31,8 @@ namespace EcoLease_Admin.Models
         public int Km { get; set; }
         public string Notes { get; set; }
         public string Img { get; set; }
-        public string Status { get; set; }
         public int Price { get; set; }
+        public string Status { get; set; }
 
         //create
         public Vehicle(string make, string model, int registered, string plateNo, int km, string notes, string status, string img, int price)
@@ -44,8 +44,8 @@ namespace EcoLease_Admin.Models
             Km = km;
             Notes = notes;
             Status = status;
-            Img = img;
             Price = price;
+            Img = img;
         }
 
 
@@ -60,8 +60,8 @@ namespace EcoLease_Admin.Models
             Km = km;
             Notes = notes;
             Status = status;
-            Img = img;
             Price = price;
+            Img = img;
         }
         public Vehicle()
         {
