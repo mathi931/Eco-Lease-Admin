@@ -40,9 +40,10 @@ namespace EcoLease_Admin.UserControls
         private void dataTableEdit(DataTable dt)
         {
             dt.Columns[0].ColumnName = "Image";
-            dt.Columns[8].ColumnName = "ID";
+            dt.Columns[6].ColumnName = "Price/Month";
+            dt.Columns[9].ColumnName = "ID";
 
-            dt.SetColumnsOrder("ID", "Make", "Model", "Registered", "PlateNo", "Km", "Status", "Notes", "Image", "Price");
+            dt.SetColumnsOrder("ID", "Make", "Model", "Registered", "PlateNo", "Km", "Status", "Price/Month", "Image", "Notes");
         }
 
         private void dgvVehicles_FilterStringChanged(object sender, EventArgs e)
@@ -84,9 +85,9 @@ namespace EcoLease_Admin.UserControls
             v.PlateNo = row.Cells[4].Value.ToString();
             v.Km = (int)row.Cells[5].Value;
             v.Status = row.Cells[6].Value.ToString();
-            v.Notes = row.Cells[7].Value.ToString();
+            v.Price = (int)row.Cells[7].Value;
             v.Img = row.Cells[8].Value.ToString();
-            v.Price = (int)row.Cells[9].Value;
+            v.Notes = row.Cells[9].Value.ToString();
             return v;
         }
     }
