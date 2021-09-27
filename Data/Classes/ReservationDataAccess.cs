@@ -16,7 +16,7 @@ namespace EcoLease_Admin.Data
         public List<Reservation> GetAll()
         {
             //query to get the reservation objects
-            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, s.name as status, c.cID, c.firstName, c.lastName, c.dateOfBirth, c.email, c.phoneNo, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
+            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, s.name as status, c.cID, c.firstName, c.lastName, c.dateOfBirth, c.email, c.phoneNo, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, v.price, st.name as status
                             FROM Reservations re
                             LEFT JOIN Statuses s ON re.statusID = s.sID
                             INNER JOIN Customers c ON re.customerID = c.cID
@@ -51,7 +51,7 @@ namespace EcoLease_Admin.Data
         public Reservation GetByID(int id)
         {
             //query to get the reservation object
-            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, s.name as status, c.cID, c.firstName, c.lastName, c.dateOfBirth, c.email, c.phoneNo, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, st.name as status
+            string query = @"SELECT re.rID, re.leaseBegin, re.leaseLast, s.name as status, c.cID, c.firstName, c.lastName, c.dateOfBirth, c.email, c.phoneNo, v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, v.price, st.name as status
                             FROM Reservations re
                             LEFT JOIN Statuses s ON re.statusID = s.sID
                             INNER JOIN Customers c ON re.customerID = c.cID

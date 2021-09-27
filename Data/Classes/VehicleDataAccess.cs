@@ -15,7 +15,7 @@ namespace EcoLease_Admin.Data
         public List<Vehicle> GetAll()
         {
             //sql query for get all
-            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, s.name AS status
+            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, v.price, s.name AS status
                              FROM Vehicles v 
                              LEFT JOIN Statuses s
                              ON v.statusID = s.sID";
@@ -41,7 +41,7 @@ namespace EcoLease_Admin.Data
         public Vehicle GetByID(int id)
         {
             //sql query for get a vehicle by ID
-            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, s.name AS status
+            string query = @"SELECT v.vID, v.make, v.model, v.registered, v.plateNo, v.km, v.notes, v.img, v.price, s.name AS status
                              FROM Vehicles v 
                              LEFT JOIN Statuses s
                              ON v.statusID = s.sID
@@ -69,7 +69,7 @@ namespace EcoLease_Admin.Data
             string queryGetID = @"SELECT s.sID from Statuses as s WHERE s.name = @statusName";
 
             //sql query for insert the new vehicle
-            string queryInsert = @"INSERT INTO Vehicles (make, model, registered, plateNo, km, notes, statusID, img) values(@make, @model, @registered, @plateNo, @km, @notes, @statusID,  @img)";
+            string queryInsert = @"INSERT INTO Vehicles (make, model, registered, plateNo, km, notes, img, price, statusID) values(@make, @model, @registered, @plateNo, @km, @notes, @img, @price, @statusID)";
 
             try
             {
@@ -88,8 +88,9 @@ namespace EcoLease_Admin.Data
                         plateNo = vehicle.PlateNo,
                         km = vehicle.Km,
                         notes = vehicle.Notes,
-                        statusID = id,
-                        img = vehicle.Img
+                        img = vehicle.Img,
+                        price = vehicle.Price,
+                        statusID = id
                     };
                     //inserts the new object into the vehicles table
                     connection.Execute(queryInsert, v);
@@ -130,7 +131,7 @@ namespace EcoLease_Admin.Data
             string queryGetID = @"SELECT s.sID from Statuses as s WHERE s.name = @status";
 
             //query for update the vehicle
-            string queryUpdate = @"UPDATE Vehicles SET make = @make, model = @model, registered = @registered, plateNo = @plateNo, km = @km, notes = @notes, statusID = @statusID, img = @img WHERE vID = @id";
+            string queryUpdate = @"UPDATE Vehicles SET make = @make, model = @model, registered = @registered, plateNo = @plateNo, km = @km, notes = @notes, img = @img, price = @price, statusID = @statusID WHERE vID = @id";
 
             try
             {
@@ -151,6 +152,7 @@ namespace EcoLease_Admin.Data
                         km = vehicle.Km,
                         notes = vehicle.Notes,
                         img = vehicle.Img,
+                        price = vehicle.Price,
                         statusID = id
                     };
 

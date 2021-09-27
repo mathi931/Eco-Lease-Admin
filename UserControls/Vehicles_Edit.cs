@@ -45,6 +45,7 @@ namespace EcoLease_Admin.UserControls
             cmbStatus.SelectedIndex = cmbStatus.FindStringExact(v.Status);
             txbNotes.Text = v.Notes;
             lbIMG.Text = v.Img;
+            numPrice.Value = v.Price;
             picBox.ImageLocation = $"{imgPath}{v.Img}";
         }
 
@@ -164,7 +165,8 @@ namespace EcoLease_Admin.UserControls
                 Km = (int)numKm.Value,
                 Notes = txbNotes.Text,
                 Status = cmbStatus.SelectedItem.ToString(),
-                Img = lbIMG.Text
+                Img = lbIMG.Text,
+                Price = (int)numPrice.Value
             };
         }
 
