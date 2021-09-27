@@ -36,8 +36,8 @@ namespace EcoLease_Admin.Data
             try
             {
                 //query for insert a new customer
-                var sql = @"INSERT INTO Customers (firstName, lastName, dateOfBirth) 
-                                   VALUES(@firstName, @lastName, @dateOfBirth)";
+                var sql = @"INSERT INTO Customers (firstName, lastName, dateOfBirth, email, phoneNo) 
+                                   VALUES(@firstName, @lastName, @dateOfBirth, @email, @phoneNo)";
 
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
@@ -80,7 +80,7 @@ namespace EcoLease_Admin.Data
             try
             {
                 //query for update a customer by id
-                var sql = @"update Customers SET firstName = @firstName, lastName = @lastName, dateOfBirth = @dateOfBirth WHERE cID = @cid";
+                var sql = @"update Customers SET firstName = @firstName, lastName = @lastName, dateOfBirth = @dateOfBirth, email = @email, phoneNo = @phoneNo WHERE cID = @cid";
 
                 //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
                 using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))

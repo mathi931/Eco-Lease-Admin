@@ -38,7 +38,7 @@ namespace EcoLease_Admin.UserControls
         {
             foreach (var c in customers)
             {
-                dt.Rows.Add(c.CId, c.FirstName, c.LastName, c.DateOfBirth);
+                dt.Rows.Add(c.CId, c.FirstName, c.LastName, c.DateOfBirth, c.Email, c.PhoneNo);
             }
             return dt;
         }
@@ -51,6 +51,8 @@ namespace EcoLease_Admin.UserControls
             dt.Columns.Add("First Name", typeof(string));
             dt.Columns.Add("Last Name", typeof(string));
             dt.Columns.Add("Date Of Birth", typeof(DateTime));
+            dt.Columns.Add("E-mail", typeof(string));
+            dt.Columns.Add("Telephone", typeof(string));
 
             return dt;
         }
@@ -93,14 +95,14 @@ namespace EcoLease_Admin.UserControls
         {
             if(btnPost.Text == "Add New" && dataGridView.SelectedRows.Count == 0)
             {
-                new CustomerDataAccess().Insert(new Customer(txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value));
+                new CustomerDataAccess().Insert(new Customer(txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text));
 
                 MessageBox.Show($"A new customer {txbFirstName.Text} just added!", "Successful Action!, Returning to Dashboard");
                 RefreshList();
             }
             else if(btnPost.Text == "Update" && dataGridView.SelectedRows.Count > 0)
             {
-                new CustomerDataAccess().Update(new Customer(Convert.ToInt32(lbID.Text), txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value));
+                new CustomerDataAccess().Update(new Customer(Convert.ToInt32(lbID.Text), txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text));
 
                 MessageBox.Show($"A customer ID: {lbID.Text} just updated!", "Successful Action!, Returning to Dashboard");
                 RefreshList();
@@ -108,11 +110,6 @@ namespace EcoLease_Admin.UserControls
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
-        {
-            dataGridView.ClearSelection();
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
         {
             dataGridView.ClearSelection();
         }
@@ -126,6 +123,8 @@ namespace EcoLease_Admin.UserControls
                 txbFirstName.Text = "";
                 txbLastName.Text = "";
                 dtpDateOfBirth.Value = DateTime.Now;
+                txbEmail.Text = "";
+                txbPhoneNo.Text = "";
             }
             //update
             else
@@ -134,6 +133,8 @@ namespace EcoLease_Admin.UserControls
                 txbFirstName.Text = selected.FirstName;
                 txbLastName.Text = selected.LastName;
                 dtpDateOfBirth.Value = selected.DateOfBirth;
+                txbEmail.Text = selected.Email;
+                txbPhoneNo.Text = selected.PhoneNo;
             }
         }
 

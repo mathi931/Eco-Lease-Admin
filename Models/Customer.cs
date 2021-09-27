@@ -13,44 +13,29 @@ namespace EcoLease_Admin.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public string Email { get; set; }
+        public string PhoneNo { get; set; }
 
 
         //create
-        public Customer(string firstName, string lastName, DateTime dateOfBirth)
+        public Customer(string firstName, string lastName, DateTime dateOfBirth, string email, string phoneNo)
         {
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
+            Email = email;
+            PhoneNo = phoneNo;
         }
 
         //read, update, delete
-        public Customer(int uid, string firstName, string lastName, DateTime dateOfBirth)
+        public Customer(int cid, string firstName, string lastName, DateTime dateOfBirth, string email, string phoneNo)
         {
-            CId = uid;
+            CId = cid;
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
+            Email = email;
+            PhoneNo = phoneNo;
         }
 
         public Customer()
