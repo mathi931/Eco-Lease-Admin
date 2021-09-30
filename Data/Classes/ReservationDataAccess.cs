@@ -56,7 +56,7 @@ namespace EcoLease_Admin.Data
                             LEFT JOIN Statuses s ON re.statusID = s.sID
                             INNER JOIN Customers c ON re.customerID = c.cID
                             INNER JOIN Vehicles v ON re.vehicleID = v.vID
-                            INNER JOIN Statuses st ON v.statusID = st.sID;";
+                            INNER JOIN Statuses st ON v.statusID = st.sID";
 
             try
             {
@@ -101,7 +101,8 @@ namespace EcoLease_Admin.Data
 
                     //creates the new object with status id
                     var a = new
-                    {   lBegin = reservation.LeaseBegin,
+                    {
+                        lBegin = reservation.LeaseBegin,
                         lLast = reservation.LeaseLast,
                         statusID = sID,
                         customerID = reservation.Customer.CId,
@@ -135,7 +136,7 @@ namespace EcoLease_Admin.Data
             catch (SqlException exp)
             {
                 //throws an error if the data access is unsucsessfull
-                throw new InvalidOperationException("Data could not be update", exp);
+                throw new InvalidOperationException("Data could not be remove", exp);
             }
         }
 
@@ -169,6 +170,34 @@ namespace EcoLease_Admin.Data
             {
                 //throws an error if the data access is unsucsessfull
                 throw new InvalidOperationException("Data could not be update", exp);
+            }
+        }
+
+        public void UpdateStatus(Reservation reservation, string status)
+        {
+            //query for update dates, status, vehicle id (customer can not change)
+            string query = @"UPDATE Reservations
+                            SET statusID = (SELECT s.sID FROM Statuses as s WHERE s.name = @status)
+                            WHERE rID = @rID;";
+
+            try
+            {
+                //open connection in try-catch with DataAccesHelper class to avoid connection string to be shown
+                using (IDbConnection connection = new SqlConnection(ConString("EcoLeaseDB")))
+                {
+                    //runs the query with a new object what contains the needed variables
+                    connection.Execute(query, new
+                    {
+                        rID = reservation.RId,
+                        status = status
+                    });
+                }
+            }
+            catch (SqlException exp)
+            {
+                //throws an error if the data access is unsucsessfull
+                throw new InvalidOperationException("Data could not be update", exp);
+
             }
         }
     }
