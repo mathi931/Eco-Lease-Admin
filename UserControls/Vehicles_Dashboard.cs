@@ -26,15 +26,6 @@ namespace EcoLease_Admin.UserControls
         public Vehicles_Dashboard()
         {
             InitializeComponent();
-
-            //create and fill dataTable because of ADGV
-            //getting the data and save it locally
-            using (var reader = ObjectReader.Create(new VehicleDataAccess().GetAll()))
-            {
-                dt.Load(reader);
-            }
-            dataTableEdit(dt);
-            dgvVehicles.DataSource = dt;
         }
 
         private void dataTableEdit(DataTable dt)
@@ -89,6 +80,21 @@ namespace EcoLease_Admin.UserControls
             v.Img = row.Cells[8].Value.ToString();
             v.Notes = row.Cells[9].Value.ToString();
             return v;
+        }
+
+        private async void Vehicles_Dashboard_Load(object sender, EventArgs e)
+        {
+            //declare the processor
+            var vehProcessor = new VehicleProcessor();
+
+            //create and fill dataTable because of ADGV
+            //getting the data and save it locally
+            using (var reader = ObjectReader.Create(await vehProcessor.LoadVehicles()))
+            {
+                dt.Load(reader);
+            }
+            dataTableEdit(dt);
+            dgvVehicles.DataSource = dt;
         }
     }
 }

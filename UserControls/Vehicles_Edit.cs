@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static EcoLease_Admin.UserControls.Methods.MessageBoxes;
 using static EcoLease_Admin.Data.Classes.DataAccessHelper;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace EcoLease_Admin.UserControls
 {
@@ -16,11 +18,11 @@ namespace EcoLease_Admin.UserControls
     {
         Panel mainPnl;
         bool update = false;
+        VehicleProcessor vehicleProc = new VehicleProcessor();
 
         public Vehicles_Edit()
         {
             InitializeComponent();
-            cmbStatus.DataSource = new StatusDataAccess().GetAll();
             numYear.Maximum = DateTime.Now.Year;
         }
 
@@ -49,7 +51,7 @@ namespace EcoLease_Admin.UserControls
             picBox.ImageLocation = $"{imgPath}{v.Img}";
         }
 
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private async void btnConfirm_Click(object sender, EventArgs e)
         {
             //insert
             if (!update)
@@ -58,7 +60,7 @@ namespace EcoLease_Admin.UserControls
                 {
                     //save image locally
                     saveImage(LocalHDDPath());
-                    new VehicleDataAccess().Insert(createVehicle());
+                    await vehicleProc.InsertVehicle(createVehicle());
                     MessageBox.Show($"A new vehicle with plate number: {txbPlateNo.Text} just added!", "Successful Action!, Returning to Dashboard");
                     //goes back to the dashboard
                     returnToDashboard();
@@ -75,7 +77,7 @@ namespace EcoLease_Admin.UserControls
                 {
                     //save image locally
                     saveImage(LocalHDDPath());
-                    new VehicleDataAccess().Update(createVehicle());
+                    await vehicleProc.UpdateVehicle(createVehicle());
                     MessageBox.Show($"A vehicle with plate number: {txbPlateNo.Text} just updated!", "Returning to Dashboard");
                     //goes back to the dashboard
                     returnToDashboard();
@@ -87,10 +89,10 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
-        private void saveImage(string imgPath)
+        private async void saveImage(string imgPath)
         {
             //gets the new name
-            string fileName = getNewImageName();
+            string fileName = await getNewImageName();
             //creates the full path what is in the resources folder with the new file name
             string fullPath = imgPath + fileName;
 
@@ -111,9 +113,9 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
-        private string getNewImageName()
+        private async Task<string> getNewImageName()
         {
-            var vehicles = new VehicleDataAccess().GetAll();
+            var vehicles = await vehicleProc.LoadVehicles();
             //selects the highest number in the images fileName ex(img124.jpg) -> for each record targets the image's fileName -> cuts out the number -> descending them -> selects the first so the largest number;
             var lastImg = vehicles.OrderByDescending(v => Int32.Parse(Regex.Match(v.Img, @"\d+").Value)).First().Img;
             //returns the last image strings incremented by 1
@@ -197,5 +199,10 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
+        private async void Vehicles_Edit_Load(object sender, EventArgs e)
+        {
+            var statusProc = new StatusProcessor();
+            cmbStatus.DataSource = await statusProc.LoadStatuses();
+        }
     }
 }

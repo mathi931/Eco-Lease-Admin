@@ -51,11 +51,13 @@ namespace EcoLease_Admin.UserControls
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(919, 754);
+            this.dataGridView.Size = new System.Drawing.Size(922, 671);
             this.dataGridView.TabIndex = 1;
             this.dataGridView.TimeFilter = false;
             this.dataGridView.SortStringChanged += new System.EventHandler(this.dgvAgreements_SortStringChanged);
             this.dataGridView.FilterStringChanged += new System.EventHandler(this.dgvAgreements_FilterStringChanged);
+            this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
+            this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dgvAgreements_SelectionChanged);
             // 
             // Reservations_Dashboard
@@ -63,7 +65,8 @@ namespace EcoLease_Admin.UserControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.dataGridView);
             this.Name = "Reservations_Dashboard";
-            this.Size = new System.Drawing.Size(919, 754);
+            this.Size = new System.Drawing.Size(922, 671);
+            this.Load += new System.EventHandler(this.Reservations_Dashboard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

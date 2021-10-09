@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EcoLease_Admin.Data.Interfaces
+namespace EcoLease_Admin.Data
 {
-    interface IStatusHandler
+    public interface IStatusProcessor
     {
-        List<Status> GetAll();
+        Task<List<Status>> LoadStatuses();
     }
 }

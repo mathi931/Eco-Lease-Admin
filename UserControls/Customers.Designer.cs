@@ -40,6 +40,10 @@ namespace EcoLease_Admin.UserControls
             this.btnPost = new System.Windows.Forms.Button();
             this.lbID = new System.Windows.Forms.Label();
             this.btnRemove = new System.Windows.Forms.Button();
+            this.txbPhoneNo = new System.Windows.Forms.TextBox();
+            this.txbEmail = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -161,9 +165,49 @@ namespace EcoLease_Admin.UserControls
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
+            // txbPhoneNo
+            // 
+            this.txbPhoneNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbPhoneNo.Location = new System.Drawing.Point(814, 597);
+            this.txbPhoneNo.Name = "txbPhoneNo";
+            this.txbPhoneNo.Size = new System.Drawing.Size(235, 29);
+            this.txbPhoneNo.TabIndex = 51;
+            // 
+            // txbEmail
+            // 
+            this.txbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbEmail.Location = new System.Drawing.Point(814, 523);
+            this.txbEmail.Name = "txbEmail";
+            this.txbEmail.Size = new System.Drawing.Size(235, 29);
+            this.txbEmail.TabIndex = 50;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(669, 603);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 20);
+            this.label4.TabIndex = 49;
+            this.label4.Text = "Telephone";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(700, 529);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 20);
+            this.label5.TabIndex = 48;
+            this.label5.Text = "E-mail";
+            // 
             // Customers
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.txbPhoneNo);
+            this.Controls.Add(this.txbEmail);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.lbID);
             this.Controls.Add(this.btnCancel);
@@ -177,6 +221,7 @@ namespace EcoLease_Admin.UserControls
             this.Controls.Add(this.dataGridView);
             this.Name = "Customers";
             this.Size = new System.Drawing.Size(1065, 760);
+            this.Load += new System.EventHandler(this.Customers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -196,5 +241,9 @@ namespace EcoLease_Admin.UserControls
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.Label lbID;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.TextBox txbPhoneNo;
+        private System.Windows.Forms.TextBox txbEmail;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

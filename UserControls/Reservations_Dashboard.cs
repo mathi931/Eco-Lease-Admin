@@ -1,4 +1,5 @@
 ﻿using EcoLease_Admin.Data;
+using EcoLease_Admin.Data.Classes;
 using EcoLease_Admin.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static EcoLease_Admin.Data.Classes.DataAccessHelper;
 
 namespace EcoLease_Admin.UserControls
 {
@@ -26,12 +28,6 @@ namespace EcoLease_Admin.UserControls
         public Reservations_Dashboard()
         {
             InitializeComponent();
-
-            //getting the data and save it locally into a list
-            list = new ReservationDataAccess().GetAll();
-            //create and fill dataTable because of ADGV
-            dt = fillDataTable(ReservationDT(), list);
-            dataGridView.DataSource = dt;
         }
 
         //on selected index change
@@ -91,6 +87,52 @@ namespace EcoLease_Admin.UserControls
         private void dgvAgreements_SortStringChanged(object sender, EventArgs e)
         {
             dt.DefaultView.Sort = dataGridView.SortString;
+        }
+
+        //changes background color depends on status
+        private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                switch (row.Cells["Status"].Value.ToString())
+                {
+                    case "Pending":
+                        row.DefaultCellStyle.BackColor = Color.Orange;
+                        break;
+                    case "Confirmed":
+                        row.DefaultCellStyle.BackColor = Color.Green;
+                        break;
+                    case "Declined":
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                        break;
+
+                    default:
+                        row.DefaultCellStyle.BackColor = Color.White;
+                        break;
+                }
+            }
+        }
+        private async void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var clickedRow = dataGridView.Rows[e.RowIndex];
+
+            if(clickedRow.Cells["Status"].Value.ToString() == "Confirmed")
+            {
+                var fileName = await new AgreementProcessor().GetFileName(Convert.ToInt32(clickedRow.Cells["ID"].Value.ToString()));
+
+                var path = $"{LocalHDDPath()}{fileName}";
+
+                System.Diagnostics.Process.Start(path);
+            }
+        }
+
+        private async void Reservations_Dashboard_Load(object sender, EventArgs e)
+        {
+            //getting the data and save it locally into a list
+            list = await new ReservationProcessor().LoadReservations();
+            //create and fill dataTable because of ADGV
+            dt = fillDataTable(ReservationDT(), list);
+            dataGridView.DataSource = dt;
         }
     }
 }

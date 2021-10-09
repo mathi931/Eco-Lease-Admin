@@ -5,24 +5,37 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using IronPdf;
 using static EcoLease_Admin.Data.Classes.DataAccessHelper;
+using static EcoLease_Admin.Models.Operations;
 
 namespace EcoLease_Admin.Models
 {
     public class Agreement
     {
-        private string _aid;
         private string htmlPath = $"{LocalHDDPath()}agreement.html";
 
-        public string AID { get => _aid; set => _aid = generateID(); }
-        public PdfDocument PDF { get; set; }
+        public int Aid { get; set; }
+        public string FileName { get; set; }
         public Reservation Reservation { get; set; }
 
+        //create a new
         public Agreement(Reservation reservation)
         {
             Reservation = reservation;
-            PDF = AgreementPDF();
+            FileName = generateFileName();
+        }
+        public Agreement()
+        {
+
+        }
+
+        public Agreement(int aid, string fileName, Reservation reservation)
+        {
+            Aid = aid;
+            FileName = fileName;
+            Reservation = reservation;
         }
 
         public PdfDocument AgreementPDF()
@@ -34,24 +47,23 @@ namespace EcoLease_Admin.Models
             htmlToPdf.PrintOptions.Footer.RightText = "{page}";
 
 
-            var pdfDoc = htmlToPdf.RenderHtmlAsPdf(editHTML());
-            pdfDoc.SaveAs($"{LocalHDDPath()}{generateFileName()}");
+            var pdfDoc = htmlToPdf.RenderHtmlAsPdf(getHTML());
+            //pdfDoc.SaveAs($"{LocalHDDPath()}{generateFileName()}");
             return pdfDoc;
+        }
+
+        public void savePDF(PdfDocument pdf)
+        {
+            pdf.SaveAs($"{LocalHDDPath()}{generateFileName()}");
         }
         private string generateFileName()
         {
-            return $"AGR{Reservation.RId}.pdf";
-        }
-        private string generateID()
-        {
-            return $"AGR{Reservation.RId}";
-        }
-        
-        private string editHTML()
+            return $"AGR{Reservation.RId}-{Reservation.Customer.FirstName}_{Reservation.Customer.LastName}.pdf";
+        } 
+        private string getHTML()
         {
             //reads the file by path
             var html = File.ReadAllLines(htmlPath);
-
 
             //loops through the lines and depends on the id changes the innerHTML
             for (int i = 0; i < html.Length; i++)
@@ -67,11 +79,11 @@ namespace EcoLease_Admin.Models
                 }
                 else if (html[i].Contains("telNo"))
                 {
-                    html[i] = Regex.Replace(html[i], @"\breplace\b", "REPLACED");
+                    html[i] = Regex.Replace(html[i], @"\breplace\b", this.Reservation.Customer.PhoneNo.ToString());
                 }
                 else if (html[i].Contains("email"))
                 {
-                    html[i] = Regex.Replace(html[i], @"\breplace\b", "REPLACED");
+                    html[i] = Regex.Replace(html[i], @"\breplace\b", this.Reservation.Customer.Email.ToString());
                 }
                 else if (html[i].Contains("leaseFrom"))
                 {
@@ -83,11 +95,11 @@ namespace EcoLease_Admin.Models
                 }
                 else if (html[i].Contains("costMonth"))
                 {
-                    html[i] = Regex.Replace(html[i], @"\breplace\b", "REPLACED");
+                    html[i] = Regex.Replace(html[i], @"\breplace\b", this.Reservation.Vehicle.Price.ToString());
                 }
                 else if (html[i].Contains("costFull"))
                 {
-                    html[i] = Regex.Replace(html[i], @"\breplace\b", "REPLACED");
+                    html[i] = Regex.Replace(html[i], @"\breplace\b", Convert.ToString(this.Reservation.toFullCost()));
                 }
                 else if (html[i].Contains("make"))
                 {
@@ -110,7 +122,8 @@ namespace EcoLease_Admin.Models
                     html[i] = Regex.Replace(html[i], @"\breplace\b", this.Reservation.Vehicle.Km.ToString());
                 }
             }
-            return string.Join("\n", html);
+            string updatedHtml = string.Join("\n", html);
+            return updatedHtml;
         }
     }
 }

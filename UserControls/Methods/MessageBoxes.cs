@@ -34,7 +34,7 @@ namespace EcoLease_Admin.UserControls.Methods
         }
         public static DialogResult dynamicQuestion(string action, string target, string title)
         {
-            var msg = MessageBox.Show($"Are you sure to {action} {target}?", title, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var msg = MessageBox.Show($"Are you sure to {action} {target}?", title, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             return msg;
         }
     }

@@ -15,38 +15,25 @@ namespace EcoLease_Admin.UserControls
     public partial class Dashboard : UserControl
     {
         List<Vehicle> vehicles = new List<Vehicle>();
-        List<Reservation> agreements = new List<Reservation>();
-        List<Request> requests = new List<Request>();
+        List<Reservation> reservations = new List<Reservation>();
 
         public Dashboard()
         {
             InitializeComponent();
-            //get all data
-            getAllData();
-            //fill the data in
-            fillView(vehicles, agreements, requests);
         }
 
-        private void fillView(List<Vehicle> vehicles, List<Reservation> agreements, List<Request> requests)
+        private void fillView(List<Vehicle> vehicles, List<Reservation> reservations)
         {
             fillVehiclePnl(vehicles);
-            fillAgreementsPnl(agreements);
-            fillRequestsPnl(requests);
+            fillReservationsPnl(reservations);
         }
 
-        private void fillRequestsPnl(List<Request> requests)
+        private void fillReservationsPnl(List<Reservation> reservations)
         {
-            lblPendingRequestCount.Text = requests.Count(n => n.Status == "Pending").ToString();
-            lblConfirmedRequestCount.Text = requests.Count(n => n.Status == "Confirmed").ToString();
-            lblDeclinedRequestCount.Text = requests.Count(n => n.Status == "Declined").ToString();
-        }
-
-        private void fillAgreementsPnl(List<Reservation> agreements)
-        {
-            lblActiveAgrCount.Text = agreements.Count(n => n.LeaseBegin >= DateTime.Today && n.LeaseLast < DateTime.Today).ToString();
-            lblStartsSoonCount.Text = agreements.Count(n => n.LeaseBegin < DateTime.Today.AddDays(3)).ToString();
-            lblEndsSoonCount.Text = agreements.Count(n => n.LeaseBegin < DateTime.Today.AddDays(3)).ToString();
-            lblExpiredCount.Text = agreements.Count(n => n.LeaseLast < DateTime.Today).ToString();
+            lblActiveAgrCount.Text = reservations.Count(n => n.LeaseBegin >= DateTime.Today && n.LeaseLast < DateTime.Today).ToString();
+            lblStartsSoonCount.Text = reservations.Count(n => n.LeaseBegin < DateTime.Today.AddDays(3)).ToString();
+            lblEndsSoonCount.Text = reservations.Count(n => n.LeaseBegin < DateTime.Today.AddDays(3)).ToString();
+            lblExpiredCount.Text = reservations.Count(n => n.LeaseLast < DateTime.Today).ToString();
         }
 
         private void fillVehiclePnl(List<Vehicle> vehicles)
@@ -58,12 +45,20 @@ namespace EcoLease_Admin.UserControls
         }
 
         //gets all the data and saves it locally
-        private void getAllData()
+        private async Task getAllData()
         {
-            vehicles = new VehicleDataAccess().GetAll();
-            agreements = new ReservationDataAccess().GetAll();
-            requests = new RequestDataAccess().GetAll();
+            vehicles =  await new VehicleProcessor().LoadVehicles();
 
+            reservations = await new ReservationProcessor().LoadReservations();
+        }
+
+        private async void Dashboard_Load(object sender, EventArgs e)
+        {
+            //gets all the data
+            await getAllData();
+
+            //fill the data in
+            fillView(vehicles, reservations);
         }
     }
 }

@@ -51,9 +51,12 @@ namespace EcoLease_Admin.UserControls
             this.btnUploadImg = new System.Windows.Forms.Button();
             this.lbIMG = new System.Windows.Forms.Label();
             this.lbID = new System.Windows.Forms.Label();
+            this.numPrice = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numKm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // lbTitle
@@ -291,9 +294,44 @@ namespace EcoLease_Admin.UserControls
             this.lbID.Size = new System.Drawing.Size(0, 20);
             this.lbID.TabIndex = 21;
             // 
+            // numPrice
+            // 
+            this.numPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numPrice.Location = new System.Drawing.Point(599, 457);
+            this.numPrice.Maximum = new decimal(new int[] {
+            1500,
+            0,
+            0,
+            0});
+            this.numPrice.Minimum = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            this.numPrice.Name = "numPrice";
+            this.numPrice.Size = new System.Drawing.Size(235, 29);
+            this.numPrice.TabIndex = 23;
+            this.numPrice.Value = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(529, 462);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 20);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Price";
+            // 
             // Vehicles_Edit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.numPrice);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbID);
             this.Controls.Add(this.lbIMG);
             this.Controls.Add(this.btnUploadImg);
@@ -318,9 +356,11 @@ namespace EcoLease_Admin.UserControls
             this.Controls.Add(this.lbTitle);
             this.Name = "Vehicles_Edit";
             this.Size = new System.Drawing.Size(919, 754);
+            this.Load += new System.EventHandler(this.Vehicles_Edit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numKm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,5 +390,7 @@ namespace EcoLease_Admin.UserControls
         private System.Windows.Forms.Button btnUploadImg;
         private System.Windows.Forms.Label lbIMG;
         private System.Windows.Forms.Label lbID;
+        private System.Windows.Forms.NumericUpDown numPrice;
+        private System.Windows.Forms.Label label1;
     }
 }

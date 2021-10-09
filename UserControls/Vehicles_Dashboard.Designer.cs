@@ -64,6 +64,7 @@ namespace EcoLease_Admin.UserControls
             this.Controls.Add(this.dgvVehicles);
             this.Name = "Vehicles_Dashboard";
             this.Size = new System.Drawing.Size(919, 754);
+            this.Load += new System.EventHandler(this.Vehicles_Dashboard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehicles)).EndInit();
             this.ResumeLayout(false);
 

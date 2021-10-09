@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EcoLease_Admin.Models
 {
-    class Status
+    public class Status
     {
         public int SId { get; set; }
         public string Name { get; set; }

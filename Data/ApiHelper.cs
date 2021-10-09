@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -17,6 +18,8 @@ namespace EcoLease_Admin.Data.Classes
             ApiClient = new HttpClient();
             ApiClient.DefaultRequestHeaders.Accept.Clear();
             ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //ApiClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["baseURL"]);
         }
+
     }
 }

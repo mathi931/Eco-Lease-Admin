@@ -23,15 +23,13 @@ namespace EcoLease_Admin.UserControls
 
         //selectedID depends on datagridview selection
         Customer selected = new Customer();
+
+        //declare the processor
+        CustomerProcessor proc = new CustomerProcessor();
+
         public Customers()
         {
             InitializeComponent();
-
-            //getting the data and save it locally into a list
-            customers = new CustomerDataAccess().GetAll();
-
-            //create and fill dataTable because of ADGV
-            RefreshList();
         }
 
         DataTable filledDataTable(DataTable dt , List<Customer> customers)
@@ -91,18 +89,18 @@ namespace EcoLease_Admin.UserControls
         }
 
 
-        private void btnPost_Click(object sender, EventArgs e)
+        private async void btnPost_Click(object sender, EventArgs e)
         {
             if(btnPost.Text == "Add New" && dataGridView.SelectedRows.Count == 0)
             {
-                new CustomerDataAccess().Insert(new Customer(txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text));
+                await proc.InsertCustomer(new Customer(txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text));
 
                 MessageBox.Show($"A new customer {txbFirstName.Text} just added!", "Successful Action!, Returning to Dashboard");
                 RefreshList();
             }
             else if(btnPost.Text == "Update" && dataGridView.SelectedRows.Count > 0)
             {
-                new CustomerDataAccess().Update(new Customer(Convert.ToInt32(lbID.Text), txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text));
+                await proc.UpdateCustomer(new Customer(Convert.ToInt32(lbID.Text), txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text));
 
                 MessageBox.Show($"A customer ID: {lbID.Text} just updated!", "Successful Action!, Returning to Dashboard");
                 RefreshList();
@@ -138,24 +136,33 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private async void btnRemove_Click(object sender, EventArgs e)
         {
             if (btnRemove.Visible && selected != null && MessageBox.Show($"Are you sure to remove the {selected.FirstName} with ID: {selected.CId} ?", "Removing Customer", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
             {
-                new CustomerDataAccess().Remove(selected);
+                await proc.RemoveCustomer(selected.CId);
                 MessageBox.Show($"{selected.FirstName} Successfully removed!");
                 RefreshList();
             }
         }
 
-        private void RefreshList()
+        private async void RefreshList()
         {
             //refresh the list
             selected = null;
             dataGridView.ClearSelection();
 
-            dt = filledDataTable(DataTbl(), new CustomerDataAccess().GetAll());
+            dt = filledDataTable(DataTbl(), await proc.LoadCustomers());
             dataGridView.DataSource = dt;
+        }
+
+        private async void Customers_Load(object sender, EventArgs e)
+        {
+            //getting the data and save it locally into a list
+            customers = await proc.LoadCustomers();
+
+            //create and fill dataTable because of ADGV
+            RefreshList();
         }
     }
 }

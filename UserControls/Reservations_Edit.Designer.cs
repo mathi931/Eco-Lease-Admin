@@ -185,6 +185,7 @@ namespace EcoLease_Admin.UserControls
             this.Controls.Add(this.label2);
             this.Name = "Reservations_Edit";
             this.Size = new System.Drawing.Size(919, 754);
+            this.Load += new System.EventHandler(this.Reservations_Edit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

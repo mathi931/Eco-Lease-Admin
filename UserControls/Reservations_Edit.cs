@@ -18,20 +18,27 @@ namespace EcoLease_Admin.UserControls
     {
         Panel mainPnl;
         bool update;
+        Reservation toEdit;
+
+        //processors
+        VehicleProcessor vehicleProc = new VehicleProcessor();
+        CustomerProcessor customerProc = new CustomerProcessor();
+        StatusProcessor statusProc = new StatusProcessor();
+        ReservationProcessor resProc = new ReservationProcessor();
+
         public Reservations_Edit(Panel pnl, Reservation editable = null)
         {
             InitializeComponent();
             mainPnl = pnl;
-
-            //fill controls
-            fillControls(editable);     
+            toEdit = editable;
         }
 
-        private void fillControls(Reservation editable = null)
+        private async Task fillControls(Reservation editable = null)
         {
-            cmbStatus.DataSource = new StatusDataAccess().GetAll();
-            cmbCustomer.DataSource = new CustomerDataAccess().GetAll();
-            cmbVehicles.DataSource = new VehicleDataAccess().GetAll();
+            cmbStatus.DataSource = await statusProc.LoadStatuses();
+            cmbCustomer.DataSource = await customerProc.LoadCustomers();
+            cmbVehicles.DataSource = await vehicleProc.LoadVehicles();
+
 
             if(editable != null)
             {
@@ -57,14 +64,14 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private async void btnConfirm_Click(object sender, EventArgs e)
         {
             //insert
             if (!update)
             {
                 try
                 {
-                    new ReservationDataAccess().Insert(getReservationObject());
+                    await resProc.InsertReservation(getReservationObject());
                     MessageBox.Show($"A new reservation just added!", "Successful Action!, Returning to Dashboard");
                     //goes back to the dashboard
                     returnToDashboard();
@@ -79,7 +86,7 @@ namespace EcoLease_Admin.UserControls
             {
                 try
                 {
-                    new ReservationDataAccess().Update(getReservationObject(true));
+                    await resProc.InsertReservation(getReservationObject(true));
                     MessageBox.Show($"An reservation with ID: {lbID.Text} just updated!", "Returning to Dashboard");
                     //goes back to the dashboard
                     returnToDashboard();
@@ -105,6 +112,11 @@ namespace EcoLease_Admin.UserControls
             mainPnl.Controls.Add(new Reservations_Dashboard
                 
                 ());
+        }
+
+        private async void Reservations_Edit_Load(object sender, EventArgs e)
+        {
+            await fillControls(toEdit);
         }
     }
 }

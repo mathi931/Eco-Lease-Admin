@@ -15,7 +15,7 @@ namespace EcoLease_Admin.UserControls
     public partial class Vehicles : UserControl
     {
         Vehicle selected = new Vehicle();
-
+        VehicleProcessor vehProcessor = new VehicleProcessor();
         public Vehicles()
         {
             InitializeComponent();
@@ -78,7 +78,7 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private async void btnRemove_Click(object sender, EventArgs e)
         {
             if (selected == null)
             {
@@ -86,7 +86,7 @@ namespace EcoLease_Admin.UserControls
             }
             else if (selected != null && MessageBox.Show($"Are you sure to remove the {selected.Make} with ID: {selected.VId} ?", "Removing Vehicle", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
             {
-                new VehicleDataAccess().Remove(selected.VId);
+                await vehProcessor.RemoveVehicle(selected.VId);
                 showPanel();
                 MessageBox.Show($"{selected.VId} Successfully removed!");
             }
