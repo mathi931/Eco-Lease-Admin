@@ -10,7 +10,7 @@ namespace EcoLease_Admin.Validators
 {
     public class VehicleValidator : AbstractValidator<Vehicle>
     {
-         public VehicleValidator()
+        public VehicleValidator()
         {
             RuleFor(v => v.Make)
                 .Cascade(CascadeMode.Stop)

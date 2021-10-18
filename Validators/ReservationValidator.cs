@@ -37,7 +37,7 @@ namespace EcoLease_Admin.Validators
             int currentYear = DateTime.Now.Year;
 
             //returns true if the input year is not older than 6 years(because of update) and not in the future with 6 years(5 years max)
-            return date.Year <= (currentYear + 6) && date.Year >= (currentYear -6);
+            return date.Year <= (currentYear + 6) && date.Year >= (currentYear - 6);
         }
     }
 }

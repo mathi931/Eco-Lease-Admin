@@ -12,14 +12,14 @@ namespace EcoLease_Admin.Validators
     {
         public CustomerValidator()
         {
+            CascadeMode = CascadeMode.Stop;
+
             RuleFor(c => c.FirstName)
-                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("{PropertyName} is Empty")
                 .Length(2, 20).WithMessage("Length ({TotalLength}) of {PropertyName} is Invalid")
                 .Must(BeAValidName).WithMessage("{PropertyName} Contains Invalid Charachters");
 
             RuleFor(c => c.LastName)
-                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("{PropertyName} is Empty")
                 .Length(2, 20).WithMessage("Length ({TotalLength}) of {PropertyName} is Invalid")
                 .Must(BeAValidName).WithMessage("{PropertyName} Contains Invalid Charachters");
@@ -31,7 +31,7 @@ namespace EcoLease_Admin.Validators
 
             RuleFor(c => c.PhoneNo)
                 .NotEmpty().WithMessage("{PropertyName} is Empty")
-                .Length(10,15).WithMessage("Length ({TotalLength}) of {PropertyName} is Invalid");
+                .Length(5, 15).WithMessage("Length ({TotalLength}) of {PropertyName} is Invalid");
 
         }
 
