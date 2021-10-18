@@ -10,6 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EcoLease_Admin.Validators;
+using FluentValidation.Results;
+using static EcoLease_Admin.UserControls.Methods.MessageBoxes;
+using EcoLease_Admin.UserControls.Methods;
 
 namespace EcoLease_Admin.UserControls
 {
@@ -32,6 +36,7 @@ namespace EcoLease_Admin.UserControls
             InitializeComponent();
         }
 
+        //fills the datatable with the customer list
         DataTable filledDataTable(DataTable dt , List<Customer> customers)
         {
             foreach (var c in customers)
@@ -41,6 +46,7 @@ namespace EcoLease_Admin.UserControls
             return dt;
         }
 
+        //creates the datatable 
         DataTable DataTbl()
         {
             DataTable dt = new DataTable();
@@ -55,6 +61,7 @@ namespace EcoLease_Admin.UserControls
             return dt;
         }
 
+        //returns a customer object by selected row 
         Customer getSelected(DataGridViewRow row)
         {
             return customers.Find(c => c.CId == (int)row.Cells[0].Value);
@@ -88,25 +95,58 @@ namespace EcoLease_Admin.UserControls
             dt.DefaultView.RowFilter = dataGridView.FilterString;
         }
 
-
+        //on confirm button click, can be : add new, update, remove customer
         private async void btnPost_Click(object sender, EventArgs e)
         {
-            if(btnPost.Text == "Add New" && dataGridView.SelectedRows.Count == 0)
-            {
-                await proc.InsertCustomer(new Customer(txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text));
+            //instance of validator
+            CustomerValidator validator = new CustomerValidator();
 
-                MessageBox.Show($"A new customer {txbFirstName.Text} just added!", "Successful Action!, Returning to Dashboard");
-                RefreshList();
+            //creates an object from input
+            var customer = new Customer(txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text);
+
+            //validation result based on input
+            ValidationResult result = validator.Validate(customer);
+
+            //on invalid input loops through the invalid inputs and notify the user
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    ErrorMessage("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage, "Validation Error");
+                }
+                return;
             }
-            else if(btnPost.Text == "Update" && dataGridView.SelectedRows.Count > 0)
-            {
-                await proc.UpdateCustomer(new Customer(Convert.ToInt32(lbID.Text), txbFirstName.Text, txbLastName.Text, dtpDateOfBirth.Value, txbEmail.Text, txbPhoneNo.Text));
 
-                MessageBox.Show($"A customer ID: {lbID.Text} just updated!", "Successful Action!, Returning to Dashboard");
-                RefreshList();
+            //if there is no targeted row from the table and the btn text is add new and the input is valid
+            //
+            if (btnPost.Text == "Add New" && dataGridView.SelectedRows.Count == 0 && result.IsValid)
+            {
+                //sends the post request with the new customer
+                await proc.InsertCustomer(customer);
+
+                //after a custome message refreshes the view
+                if (InfoMessage($"A new customer {txbFirstName.Text} just added!") == DialogResult.OK)
+                {
+                    RefreshList();
+                }
+            }
+
+            //if there is a targeted row from the table and the btn text is update and the input is valid
+            //
+            else if (btnPost.Text == "Update" && dataGridView.SelectedRows.Count > 0 && result.IsValid)
+            {
+                //sends the put request with the updated customer
+                await proc.UpdateCustomer(customer);
+
+                //after a custome message refreshes the view
+                if (InfoMessage($"A customer ID: {lbID.Text} just updated!") == DialogResult.OK) 
+                {
+                    RefreshList();
+                }
             }
         }
-
+        
+        //on cancel button click removes the input
         private void btnCancel_Click(object sender, EventArgs e)
         {
             dataGridView.ClearSelection();
@@ -120,7 +160,7 @@ namespace EcoLease_Admin.UserControls
                 lbID.Text = "";
                 txbFirstName.Text = "";
                 txbLastName.Text = "";
-                dtpDateOfBirth.Value = DateTime.Now;
+                dtpDateOfBirth.Value = DateTime.Now.AddYears(-19);
                 txbEmail.Text = "";
                 txbPhoneNo.Text = "";
             }
@@ -136,13 +176,20 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
+        //remove button click
         private async void btnRemove_Click(object sender, EventArgs e)
         {
-            if (btnRemove.Visible && selected != null && MessageBox.Show($"Are you sure to remove the {selected.FirstName} with ID: {selected.CId} ?", "Removing Customer", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+            //if there is a selected row and the dialog result is OK
+            if (btnRemove.Visible && selected != null && DynamicQuestion("remove the", $" {selected.FirstName} with ID: {selected.CId} ?", "Removing Customer") == DialogResult.OK)
             {
+                //removes the customer with delete request and refreshes the view
                 await proc.RemoveCustomer(selected.CId);
-                MessageBox.Show($"{selected.FirstName} Successfully removed!");
-                RefreshList();
+
+                //after a custome message refreshes the view
+                if (InfoMessage($"A customer ID: {selected.CId} just removed!") == DialogResult.OK)
+                {
+                    RefreshList();
+                }
             }
         }
 
@@ -158,6 +205,9 @@ namespace EcoLease_Admin.UserControls
 
         private async void Customers_Load(object sender, EventArgs e)
         {
+            //set values in DatePicker
+            new SetInput().SetDatepicker(dtpDateOfBirth, DateTime.Now.AddYears(-19), -120, -18);
+
             //getting the data and save it locally into a list
             customers = await proc.LoadCustomers();
 

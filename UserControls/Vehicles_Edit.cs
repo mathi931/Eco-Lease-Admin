@@ -9,8 +9,13 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static EcoLease_Admin.UserControls.Methods.MessageBoxes;
 using static EcoLease_Admin.Data.Classes.DataAccessHelper;
+using static EcoLease_Admin.Models.Operations;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using EcoLease_Admin.UserControls.Methods;
+using EcoLease_Admin.Validators;
+using FluentValidation.Results;
+using System.Drawing;
 
 namespace EcoLease_Admin.UserControls
 {
@@ -18,26 +23,33 @@ namespace EcoLease_Admin.UserControls
     {
         Panel mainPnl;
         bool update = false;
+        List<Vehicle> vehicles = new List<Vehicle>();
+
+        //declare the local processor
         VehicleProcessor vehicleProc = new VehicleProcessor();
 
+        //constructors, depends on declaration passed a value or not can be a view for update or add a new vehicle
         public Vehicles_Edit()
         {
             InitializeComponent();
-            numYear.Maximum = DateTime.Now.Year;
+            SetNumPickers();
         }
+
 
         public Vehicles_Edit(Panel pnl, Vehicle editable = null) : this()
         {
             mainPnl = pnl;
             if (editable != null)
             {
-                fillControls(editable, LocalHDDPath());
+                fillControls(editable);
                 update = true;
             }
         }
 
-        private void fillControls(Vehicle v, string imgPath)
+        //fills the input controls with the editable vehicle
+        private void fillControls(Vehicle v)
         {
+            lbTitle.Text = "Update Vehicle";
             lbID.Text = v.VId.ToString();
             txbMake.Text = v.Make;
             txbModel.Text = v.Model;
@@ -48,118 +60,107 @@ namespace EcoLease_Admin.UserControls
             txbNotes.Text = v.Notes;
             lbIMG.Text = v.Img;
             numPrice.Value = v.Price;
-            picBox.ImageLocation = $"{imgPath}{v.Img}";
+            picBox.LoadAsync($"http://localhost:12506/api/Files/{v.Img}");
         }
 
         private async void btnConfirm_Click(object sender, EventArgs e)
         {
-            //insert
+            //declares the validator and the vehicle object what created from input data
+            VehicleValidator validator = new VehicleValidator();
+            var vehicle = createVehicle();
+
+            //validation result based on input
+            ValidationResult result = validator.Validate(vehicle);
+
+            //on invalid input loops through the invalid inputs and notify the user
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    ErrorMessage("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage, "Validation Error");
+                }
+                return;
+            }
+            //create a binary img
+            var binaryImg = ImageToByteArray(picBox.Image);
+
+            //insert if input is valid
             if (!update)
             {
                 try
                 {
-                    //save image locally
-                    saveImage(LocalHDDPath());
-                    await vehicleProc.InsertVehicle(createVehicle());
-                    MessageBox.Show($"A new vehicle with plate number: {txbPlateNo.Text} just added!", "Successful Action!, Returning to Dashboard");
-                    //goes back to the dashboard
-                    returnToDashboard();
+                    //sends the post request with the valid object
+                    await vehicleProc.InsertVehicle(vehicle);
+
+                    //uploads img
+                    await new FileProcessor().InsertFile(binaryImg ,vehicle.Img);
+
+                    //after notify the user changes the view to dashboard
+                    if (InfoMessage($"A new vehicle with plate number: {txbPlateNo.Text} just added!") == DialogResult.OK)
+                    {
+                        //goes back to the dashboard
+                        returnToDashboard();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    errorMessage(ex.Message, "Unsuccessfull Action!");
+                    ErrorMessage(ex.Message, "Unsuccessfull Action!");
                 }
             }
+
             //edit
             else
             {
                 try
                 {
-                    //save image locally
-                    saveImage(LocalHDDPath());
-                    await vehicleProc.UpdateVehicle(createVehicle());
-                    MessageBox.Show($"A vehicle with plate number: {txbPlateNo.Text} just updated!", "Returning to Dashboard");
-                    //goes back to the dashboard
-                    returnToDashboard();
+                    //have to check if the updated vehicles img is the same otherwise not upload it 
+
+
+                    //sends put request with the valid object
+                    await vehicleProc.UpdateVehicle(vehicle);
+
+                    //uploads img
+                    await new FileProcessor().InsertFile(binaryImg, vehicle.Img);
+
+                    
+
+                    //after notify the user changes the view to dashboard
+                    if (InfoMessage($"A new vehicle with plate number: {txbPlateNo.Text} just updates!") == DialogResult.OK)
+                    {
+                        //goes back to the dashboard
+                        returnToDashboard();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    errorMessage(ex.Message, "Unsuccessfull Action!");
+                    ErrorMessage(ex.Message, "Unsuccessfull Action!");
                 }
             }
         }
 
-        private async void saveImage(string imgPath)
+        //creates file name
+        private string getFileName()
         {
-            //gets the new name
-            string fileName = await getNewImageName();
-            //creates the full path what is in the resources folder with the new file name
-            string fullPath = imgPath + fileName;
+            //selects the last id and add one to it
+            var lastID = vehicles.OrderByDescending(v => v.VId).First().VId++;
 
-            //if there is img and not in the folder yet
-            if (!String.IsNullOrEmpty(picBox.ImageLocation) && !fileExist(imgPath, picBox.ImageLocation))
-            {
-                //copies the uploaded image to local directory with new file name
-                File.Copy(picBox.ImageLocation, fullPath);
-
-                //changes the labels text to a new files name
-                lbIMG.Text = fileName;
-            }
-            //if there is image but the folder already contains it
-            else if (!String.IsNullOrEmpty(picBox.ImageLocation) && fileExist(imgPath, picBox.ImageLocation))
-            {
-
-                lbIMG.Text = fileName;
-            }
+            //returns the edited string
+            return $"Image{lastID}.jpg";
         }
 
-        private async Task<string> getNewImageName()
-        {
-            var vehicles = await vehicleProc.LoadVehicles();
-            //selects the highest number in the images fileName ex(img124.jpg) -> for each record targets the image's fileName -> cuts out the number -> descending them -> selects the first so the largest number;
-            var lastImg = vehicles.OrderByDescending(v => Int32.Parse(Regex.Match(v.Img, @"\d+").Value)).First().Img;
-            //returns the last image strings incremented by 1
-            return Regex.Replace(lastImg, "\\d+",
-    m => (int.Parse(m.Value) + 1).ToString(new string('0', m.Value.Length)));
-        }
 
-        private bool fileExist(string path, string selected)
-        {
-            //default result
-            bool result = false;
-
-            //get all files from resources folder
-            string[] files = Directory.GetFiles(path);
-
-            //get the char count of the selected file
-            var selectedData = Encoding.UTF8.GetCharCount(File.ReadAllBytes(selected));
-
-
-            foreach (var item in files)
-            {
-                //if one of the files charcount in the folders equals with the selected charcount => file is tha same => change the result to true;
-                var itemData = Encoding.UTF8.GetCharCount(File.ReadAllBytes(item));
-
-                if (itemData == selectedData)
-                {
-                    result = true;
-                }
-            }
-            //returns the result
-            return result;
-        }
-
+        //changes the view to Dashboard
         private void returnToDashboard()
         {
             mainPnl.Controls.Clear();
             mainPnl.Controls.Add(new Vehicles_Dashboard());
         }
 
+        //creates a Vehicle object from input values
         private Vehicle createVehicle()
         {
-            return new Vehicle
+            var vehicle = new Vehicle
             {
-                VId = Convert.ToInt32(lbID.Text),
                 Make = txbMake.Text,
                 Model = txbModel.Text,
                 Registered = (int)numYear.Value,
@@ -170,6 +171,13 @@ namespace EcoLease_Admin.UserControls
                 Img = lbIMG.Text,
                 Price = (int)numPrice.Value
             };
+
+            if (lbID.Text.Trim().Length > 0 && Int32.TryParse(lbID.Text, out int res))
+            {
+                vehicle.VId = res;
+            }
+            return vehicle;
+            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -180,6 +188,7 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
+        //select image from folder
         private void btnUploadImg_Click(object sender, EventArgs e)
         {
             try
@@ -191,18 +200,33 @@ namespace EcoLease_Admin.UserControls
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     picBox.ImageLocation = dialog.FileName;
+                    lbIMG.Text = getFileName();
                 }
             }
             catch (Exception ex)
             {
-                errorMessage(ex.Message, "Upload Unsuccesfull!");
+                ErrorMessage(ex.Message, "Upload Unsuccesfull!");
             }
         }
 
+        //on load event
         private async void Vehicles_Edit_Load(object sender, EventArgs e)
         {
+            //set status combobox values
             var statusProc = new StatusProcessor();
             cmbStatus.DataSource = await statusProc.LoadStatuses();
+            vehicles = await vehicleProc.LoadVehicles();
+        }
+
+        //sets numeric input values
+        private void SetNumPickers()
+        {
+            int yearNow = DateTime.Now.Year;
+
+            var inputSetter = new SetInput();
+            inputSetter.SetNumUpDown(numKm, 100, 100, 200000);
+            inputSetter.SetNumUpDown(numPrice, 200, 200, 1000);
+            inputSetter.SetNumUpDown(numYear, yearNow, yearNow - 20, yearNow);
         }
     }
 }

@@ -4,13 +4,14 @@ using EcoLease_Admin.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static EcoLease_Admin.Data.Classes.DataAccessHelper;
+using static EcoLease_Admin.Data.Classes.ApiHelper;
 
 namespace EcoLease_Admin.UserControls
 {
@@ -99,7 +100,7 @@ namespace EcoLease_Admin.UserControls
                     case "Pending":
                         row.DefaultCellStyle.BackColor = Color.Orange;
                         break;
-                    case "Confirmed":
+                    case "Active":
                         row.DefaultCellStyle.BackColor = Color.Green;
                         break;
                     case "Declined":
@@ -116,13 +117,14 @@ namespace EcoLease_Admin.UserControls
         {
             var clickedRow = dataGridView.Rows[e.RowIndex];
 
-            if(clickedRow.Cells["Status"].Value.ToString() == "Confirmed")
+            if(clickedRow.Cells["Status"].Value.ToString() == "Active")
             {
                 var fileName = await new AgreementProcessor().GetFileName(Convert.ToInt32(clickedRow.Cells["ID"].Value.ToString()));
 
-                var path = $"{LocalHDDPath()}{fileName}";
-
-                System.Diagnostics.Process.Start(path);
+                //var path = $"{LocalHDDPath()}{fileName}";
+                var x = $"{ApiClient.BaseAddress}";
+                var y = getUrl();
+                System.Diagnostics.Process.Start(x);
             }
         }
 
@@ -130,6 +132,7 @@ namespace EcoLease_Admin.UserControls
         {
             //getting the data and save it locally into a list
             list = await new ReservationProcessor().LoadReservations();
+
             //create and fill dataTable because of ADGV
             dt = fillDataTable(ReservationDT(), list);
             dataGridView.DataSource = dt;

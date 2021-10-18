@@ -46,9 +46,9 @@ namespace EcoLease_Admin.UserControls
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(586, 646);
+            this.btnCancel.Location = new System.Drawing.Point(547, 619);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(134, 47);
+            this.btnCancel.Size = new System.Drawing.Size(134, 41);
             this.btnCancel.TabIndex = 37;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@ namespace EcoLease_Admin.UserControls
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(756, 646);
+            this.btnConfirm.Location = new System.Drawing.Point(717, 619);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(134, 47);
+            this.btnConfirm.Size = new System.Drawing.Size(134, 41);
             this.btnConfirm.TabIndex = 36;
             this.btnConfirm.Text = "Ok";
             this.btnConfirm.UseVisualStyleBackColor = true;

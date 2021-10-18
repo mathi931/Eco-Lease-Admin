@@ -112,6 +112,7 @@ namespace EcoLease_Admin.UserControls
             // 
             this.dtpDateOfBirth.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDateOfBirth.Location = new System.Drawing.Point(139, 678);
+            this.dtpDateOfBirth.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpDateOfBirth.Name = "dtpDateOfBirth";
             this.dtpDateOfBirth.Size = new System.Drawing.Size(235, 20);
             this.dtpDateOfBirth.TabIndex = 42;
@@ -154,6 +155,7 @@ namespace EcoLease_Admin.UserControls
             this.lbID.Name = "lbID";
             this.lbID.Size = new System.Drawing.Size(0, 20);
             this.lbID.TabIndex = 46;
+            this.lbID.Visible = false;
             // 
             // btnRemove
             // 

@@ -34,7 +34,6 @@ namespace EcoLease_Admin.UserControls
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnReservations = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnDecline = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -86,16 +85,6 @@ namespace EcoLease_Admin.UserControls
             this.btnReservations.UseVisualStyleBackColor = true;
             this.btnReservations.Click += new System.EventHandler(this.btnAgreements_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(27, 473);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 37);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Get Contract";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btnDecline
             // 
             this.btnDecline.Location = new System.Drawing.Point(900, 696);
@@ -120,7 +109,6 @@ namespace EcoLease_Admin.UserControls
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.btnDecline);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.container);
             this.Controls.Add(this.btnRemove);
@@ -140,7 +128,6 @@ namespace EcoLease_Admin.UserControls
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnReservations;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnDecline;
         private System.Windows.Forms.Button btnAccept;
     }

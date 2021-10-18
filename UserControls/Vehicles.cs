@@ -9,13 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static EcoLease_Admin.UserControls.Methods.MessageBoxes;
 
 namespace EcoLease_Admin.UserControls
 {
     public partial class Vehicles : UserControl
     {
+        //local variable for selected vehicle and the data processor
         Vehicle selected = new Vehicle();
         VehicleProcessor vehProcessor = new VehicleProcessor();
+
         public Vehicles()
         {
             InitializeComponent();
@@ -50,45 +53,51 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
+        //changes the local selected variable on gridview selection change
         public void OnSelectedVehicleChanged(object source, Vehicle selectedV)
         {
             this.selected = selectedV;
         }
 
+        //opens the dashboard
         private void btnFleet_Click(object sender, EventArgs e)
         {
             showPanel();
         }
 
+        //opens the edit view
         private void btnAdd_Click(object sender, EventArgs e)
         {
             showPanel(1);
         }
 
+        //if there is selected element shows the edit view with the selected vehicle
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (selected == null)
             {
-                MessageBox.Show("Please select a car first to edit!");
+                ErrorMessage("Please select a car first to edit!", "Error");
             }
             else if (selected != null)
             {
                 showPanel(2, selected);
-                MessageBox.Show(selected.VId.ToString());
             }
         }
 
+        //clicking on remove button, if there is selected sends the delete request and response for the user then changes the view to dashboard
         private async void btnRemove_Click(object sender, EventArgs e)
         {
             if (selected == null)
             {
-                MessageBox.Show("Please select a car first to remove!");
+                ErrorMessage("Please select a car first to remove!", "Error!");
             }
-            else if (selected != null && MessageBox.Show($"Are you sure to remove the {selected.Make} with ID: {selected.VId} ?", "Removing Vehicle", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+            else if (selected != null && DynamicQuestion("remove", $"the {selected.Make} with ID: {selected.VId} ?", "Removing Vehicle") == DialogResult.OK)
             {
                 await vehProcessor.RemoveVehicle(selected.VId);
-                showPanel();
-                MessageBox.Show($"{selected.VId} Successfully removed!");
+                if (InfoMessage($"{selected.VId} Successfully removed!") == DialogResult.OK)
+                {
+                    showPanel();
+                }
             }
         }
     }

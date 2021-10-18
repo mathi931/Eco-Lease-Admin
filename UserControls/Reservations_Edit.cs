@@ -1,6 +1,9 @@
 ﻿using EcoLease_Admin.Data;
 using EcoLease_Admin.Data.Classes;
 using EcoLease_Admin.Models;
+using EcoLease_Admin.UserControls.Methods;
+using EcoLease_Admin.Validators;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,12 +38,19 @@ namespace EcoLease_Admin.UserControls
 
         private async Task fillControls(Reservation editable = null)
         {
+            var inputFiller = new SetInput();
+
+            //loads the comboboxes
             cmbStatus.DataSource = await statusProc.LoadStatuses();
             cmbCustomer.DataSource = await customerProc.LoadCustomers();
             cmbVehicles.DataSource = await vehicleProc.LoadVehicles();
 
+            //sets the datpickers
+            inputFiller.SetDatepicker(dtpLeaseBegin, DateTime.Now, -7, 1);
+            inputFiller.SetDatepicker(dtpLeaseLast, DateTime.Now, -7, 7);
 
-            if(editable != null)
+            //if there is a passed value then its an update => load the object to input values
+            if (editable != null)
             {
                 lbID.Text = editable.RId.ToString();
                 dtpLeaseBegin.Value = editable.LeaseBegin;
@@ -52,6 +62,7 @@ namespace EcoLease_Admin.UserControls
             }
         }
 
+        //gets an object from input
         private Reservation getReservationObject(bool update=false)
         {
             if (update)
@@ -66,54 +77,83 @@ namespace EcoLease_Admin.UserControls
 
         private async void btnConfirm_Click(object sender, EventArgs e)
         {
+            //instance of validator
+            ReservationValidator validator = new ReservationValidator();
+
+            //creates an object from input
+            var reservation = getReservationObject();
+
+            //validation result based on input
+            ValidationResult result = validator.Validate(reservation);
+
+            //on invalid input loops through the invalid inputs and notify the user
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    ErrorMessage("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage, "Validation Error");
+                }
+                return;
+            }
+
             //insert
             if (!update)
             {
                 try
                 {
-                    await resProc.InsertReservation(getReservationObject());
-                    MessageBox.Show($"A new reservation just added!", "Successful Action!, Returning to Dashboard");
-                    //goes back to the dashboard
-                    returnToDashboard();
+                    //sends a post request
+                    await resProc.InsertReservation(reservation);
+
+                    if(InfoMessage($"A new reservation just added!") == DialogResult.OK)
+                    {
+                        //goes back to the dashboard
+                        returnToDashboard();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    errorMessage(ex.Message, "Unsuccessfull Action!");
+                    ErrorMessage(ex.Message, "Unsuccessfull Action!");
                 }
             }
+
             //edit
             else
             {
                 try
                 {
-                    await resProc.InsertReservation(getReservationObject(true));
-                    MessageBox.Show($"An reservation with ID: {lbID.Text} just updated!", "Returning to Dashboard");
-                    //goes back to the dashboard
-                    returnToDashboard();
+                    //sends a put Request
+                    await resProc.UpdateReservation(getReservationObject(true));
+
+                    if (InfoMessage($"An reservation with ID: {lbID.Text} just updated!") == DialogResult.OK)
+                    {
+                        //goes back to the dashboard
+                        returnToDashboard();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    errorMessage(ex.Message, "Unsuccessfull Action!");
+                    ErrorMessage(ex.Message, "Unsuccessfull Action!");
                 }
             }
         }
 
+        //on cancel button click, returns to the dashboard
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"Are you sure to exit ?", "Returning to Dashboard", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+            if (DynamicQuestion("exit ?", " ", "Returning to Dashboard") == DialogResult.OK)
             {
                 returnToDashboard();
             }
         }
 
+        //changes view to dashboard
         private void returnToDashboard()
         {
             mainPnl.Controls.Clear();
-            mainPnl.Controls.Add(new Reservations_Dashboard
-                
-                ());
+            mainPnl.Controls.Add(new Reservations_Dashboard());
         }
 
+        //on load event
         private async void Reservations_Edit_Load(object sender, EventArgs e)
         {
             await fillControls(toEdit);

@@ -39,6 +39,7 @@ namespace EcoLease_Admin.UserControls
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lbReservationsTotalCount = new System.Windows.Forms.Label();
             this.lblExpiredCount = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.lblEndsSoonCount = new System.Windows.Forms.Label();
@@ -48,6 +49,7 @@ namespace EcoLease_Admin.UserControls
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbVehiclesTotalCount = new System.Windows.Forms.Label();
             this.lblOutOfServiceCount = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.lblAvailableCount = new System.Windows.Forms.Label();
@@ -57,9 +59,18 @@ namespace EcoLease_Admin.UserControls
             this.label6 = new System.Windows.Forms.Label();
             this.lb = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lbEarningTotal = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbEarningsYearly = new System.Windows.Forms.Label();
+            this.lbEarningsMonthly = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -72,7 +83,7 @@ namespace EcoLease_Admin.UserControls
             this.panel3.Controls.Add(this.label27);
             this.panel3.Controls.Add(this.label28);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(672, 40);
+            this.panel3.Location = new System.Drawing.Point(690, 40);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(240, 180);
             this.panel3.TabIndex = 4;
@@ -91,31 +102,31 @@ namespace EcoLease_Admin.UserControls
             // 
             this.lblDeclinedRequestCount.AutoSize = true;
             this.lblDeclinedRequestCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeclinedRequestCount.Location = new System.Drawing.Point(187, 124);
+            this.lblDeclinedRequestCount.Location = new System.Drawing.Point(160, 124);
             this.lblDeclinedRequestCount.Name = "lblDeclinedRequestCount";
-            this.lblDeclinedRequestCount.Size = new System.Drawing.Size(22, 16);
+            this.lblDeclinedRequestCount.Size = new System.Drawing.Size(58, 16);
             this.lblDeclinedRequestCount.TabIndex = 22;
-            this.lblDeclinedRequestCount.Text = "22";
+            this.lblDeclinedRequestCount.Text = "No Data";
             // 
             // lblConfirmedRequestCount
             // 
             this.lblConfirmedRequestCount.AutoSize = true;
             this.lblConfirmedRequestCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfirmedRequestCount.Location = new System.Drawing.Point(187, 89);
+            this.lblConfirmedRequestCount.Location = new System.Drawing.Point(160, 89);
             this.lblConfirmedRequestCount.Name = "lblConfirmedRequestCount";
-            this.lblConfirmedRequestCount.Size = new System.Drawing.Size(22, 16);
+            this.lblConfirmedRequestCount.Size = new System.Drawing.Size(58, 16);
             this.lblConfirmedRequestCount.TabIndex = 21;
-            this.lblConfirmedRequestCount.Text = "22";
+            this.lblConfirmedRequestCount.Text = "No Data";
             // 
             // lblPendingRequestCount
             // 
             this.lblPendingRequestCount.AutoSize = true;
             this.lblPendingRequestCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPendingRequestCount.Location = new System.Drawing.Point(187, 56);
+            this.lblPendingRequestCount.Location = new System.Drawing.Point(160, 56);
             this.lblPendingRequestCount.Name = "lblPendingRequestCount";
-            this.lblPendingRequestCount.Size = new System.Drawing.Size(22, 16);
+            this.lblPendingRequestCount.Size = new System.Drawing.Size(58, 16);
             this.lblPendingRequestCount.TabIndex = 20;
-            this.lblPendingRequestCount.Text = "22";
+            this.lblPendingRequestCount.Text = "No Data";
             // 
             // label27
             // 
@@ -143,9 +154,9 @@ namespace EcoLease_Admin.UserControls
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 2);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 24);
+            this.label2.Size = new System.Drawing.Size(89, 24);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Reservation";
+            this.label2.Text = "Requests";
             // 
             // label3
             // 
@@ -160,6 +171,7 @@ namespace EcoLease_Admin.UserControls
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lbReservationsTotalCount);
             this.panel2.Controls.Add(this.lblExpiredCount);
             this.panel2.Controls.Add(this.label14);
             this.panel2.Controls.Add(this.lblEndsSoonCount);
@@ -169,20 +181,30 @@ namespace EcoLease_Admin.UserControls
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label19);
             this.panel2.Controls.Add(this.label20);
-            this.panel2.Location = new System.Drawing.Point(411, 40);
+            this.panel2.Location = new System.Drawing.Point(690, 478);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(240, 180);
             this.panel2.TabIndex = 3;
+            // 
+            // lbReservationsTotalCount
+            // 
+            this.lbReservationsTotalCount.AutoSize = true;
+            this.lbReservationsTotalCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbReservationsTotalCount.Location = new System.Drawing.Point(164, 8);
+            this.lbReservationsTotalCount.Name = "lbReservationsTotalCount";
+            this.lbReservationsTotalCount.Size = new System.Drawing.Size(68, 20);
+            this.lbReservationsTotalCount.TabIndex = 17;
+            this.lbReservationsTotalCount.Text = "No Data";
             // 
             // lblExpiredCount
             // 
             this.lblExpiredCount.AutoSize = true;
             this.lblExpiredCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpiredCount.Location = new System.Drawing.Point(187, 143);
+            this.lblExpiredCount.Location = new System.Drawing.Point(147, 143);
             this.lblExpiredCount.Name = "lblExpiredCount";
-            this.lblExpiredCount.Size = new System.Drawing.Size(22, 16);
+            this.lblExpiredCount.Size = new System.Drawing.Size(58, 16);
             this.lblExpiredCount.TabIndex = 16;
-            this.lblExpiredCount.Text = "22";
+            this.lblExpiredCount.Text = "No Data";
             // 
             // label14
             // 
@@ -198,31 +220,31 @@ namespace EcoLease_Admin.UserControls
             // 
             this.lblEndsSoonCount.AutoSize = true;
             this.lblEndsSoonCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEndsSoonCount.Location = new System.Drawing.Point(187, 108);
+            this.lblEndsSoonCount.Location = new System.Drawing.Point(147, 108);
             this.lblEndsSoonCount.Name = "lblEndsSoonCount";
-            this.lblEndsSoonCount.Size = new System.Drawing.Size(22, 16);
+            this.lblEndsSoonCount.Size = new System.Drawing.Size(58, 16);
             this.lblEndsSoonCount.TabIndex = 14;
-            this.lblEndsSoonCount.Text = "22";
+            this.lblEndsSoonCount.Text = "No Data";
             // 
             // lblStartsSoonCount
             // 
             this.lblStartsSoonCount.AutoSize = true;
             this.lblStartsSoonCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStartsSoonCount.Location = new System.Drawing.Point(187, 73);
+            this.lblStartsSoonCount.Location = new System.Drawing.Point(147, 73);
             this.lblStartsSoonCount.Name = "lblStartsSoonCount";
-            this.lblStartsSoonCount.Size = new System.Drawing.Size(22, 16);
+            this.lblStartsSoonCount.Size = new System.Drawing.Size(58, 16);
             this.lblStartsSoonCount.TabIndex = 13;
-            this.lblStartsSoonCount.Text = "22";
+            this.lblStartsSoonCount.Text = "No Data";
             // 
             // lblActiveAgrCount
             // 
             this.lblActiveAgrCount.AutoSize = true;
             this.lblActiveAgrCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblActiveAgrCount.Location = new System.Drawing.Point(187, 40);
+            this.lblActiveAgrCount.Location = new System.Drawing.Point(147, 40);
             this.lblActiveAgrCount.Name = "lblActiveAgrCount";
-            this.lblActiveAgrCount.Size = new System.Drawing.Size(22, 16);
+            this.lblActiveAgrCount.Size = new System.Drawing.Size(58, 16);
             this.lblActiveAgrCount.TabIndex = 12;
-            this.lblActiveAgrCount.Text = "22";
+            this.lblActiveAgrCount.Text = "No Data";
             // 
             // label18
             // 
@@ -257,6 +279,7 @@ namespace EcoLease_Admin.UserControls
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lbVehiclesTotalCount);
             this.panel1.Controls.Add(this.lblOutOfServiceCount);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.lblAvailableCount);
@@ -271,15 +294,25 @@ namespace EcoLease_Admin.UserControls
             this.panel1.Size = new System.Drawing.Size(240, 180);
             this.panel1.TabIndex = 2;
             // 
+            // lbVehiclesTotalCount
+            // 
+            this.lbVehiclesTotalCount.AutoSize = true;
+            this.lbVehiclesTotalCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbVehiclesTotalCount.Location = new System.Drawing.Point(167, 8);
+            this.lbVehiclesTotalCount.Name = "lbVehiclesTotalCount";
+            this.lbVehiclesTotalCount.Size = new System.Drawing.Size(68, 20);
+            this.lbVehiclesTotalCount.TabIndex = 9;
+            this.lbVehiclesTotalCount.Text = "No Data";
+            // 
             // lblOutOfServiceCount
             // 
             this.lblOutOfServiceCount.AutoSize = true;
             this.lblOutOfServiceCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOutOfServiceCount.Location = new System.Drawing.Point(186, 143);
+            this.lblOutOfServiceCount.Location = new System.Drawing.Point(150, 143);
             this.lblOutOfServiceCount.Name = "lblOutOfServiceCount";
-            this.lblOutOfServiceCount.Size = new System.Drawing.Size(22, 16);
+            this.lblOutOfServiceCount.Size = new System.Drawing.Size(58, 16);
             this.lblOutOfServiceCount.TabIndex = 8;
-            this.lblOutOfServiceCount.Text = "22";
+            this.lblOutOfServiceCount.Text = "No Data";
             // 
             // label11
             // 
@@ -295,31 +328,31 @@ namespace EcoLease_Admin.UserControls
             // 
             this.lblAvailableCount.AutoSize = true;
             this.lblAvailableCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvailableCount.Location = new System.Drawing.Point(186, 108);
+            this.lblAvailableCount.Location = new System.Drawing.Point(150, 108);
             this.lblAvailableCount.Name = "lblAvailableCount";
-            this.lblAvailableCount.Size = new System.Drawing.Size(22, 16);
+            this.lblAvailableCount.Size = new System.Drawing.Size(58, 16);
             this.lblAvailableCount.TabIndex = 6;
-            this.lblAvailableCount.Text = "22";
+            this.lblAvailableCount.Text = "No Data";
             // 
             // lblReservedCount
             // 
             this.lblReservedCount.AutoSize = true;
             this.lblReservedCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReservedCount.Location = new System.Drawing.Point(186, 73);
+            this.lblReservedCount.Location = new System.Drawing.Point(150, 73);
             this.lblReservedCount.Name = "lblReservedCount";
-            this.lblReservedCount.Size = new System.Drawing.Size(22, 16);
+            this.lblReservedCount.Size = new System.Drawing.Size(58, 16);
             this.lblReservedCount.TabIndex = 5;
-            this.lblReservedCount.Text = "22";
+            this.lblReservedCount.Text = "No Data";
             // 
             // lblOnLeaseCount
             // 
             this.lblOnLeaseCount.AutoSize = true;
             this.lblOnLeaseCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOnLeaseCount.Location = new System.Drawing.Point(186, 40);
+            this.lblOnLeaseCount.Location = new System.Drawing.Point(150, 40);
             this.lblOnLeaseCount.Name = "lblOnLeaseCount";
-            this.lblOnLeaseCount.Size = new System.Drawing.Size(22, 16);
+            this.lblOnLeaseCount.Size = new System.Drawing.Size(58, 16);
             this.lblOnLeaseCount.TabIndex = 4;
-            this.lblOnLeaseCount.Text = "22";
+            this.lblOnLeaseCount.Text = "No Data";
             // 
             // label7
             // 
@@ -357,13 +390,99 @@ namespace EcoLease_Admin.UserControls
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(2, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 24);
+            this.label1.Size = new System.Drawing.Size(83, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Vehicle Status";
+            this.label1.Text = "Vehicles";
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.lbEarningTotal);
+            this.panel4.Controls.Add(this.label5);
+            this.panel4.Controls.Add(this.lbEarningsYearly);
+            this.panel4.Controls.Add(this.lbEarningsMonthly);
+            this.panel4.Controls.Add(this.label13);
+            this.panel4.Controls.Add(this.label15);
+            this.panel4.Controls.Add(this.label16);
+            this.panel4.Location = new System.Drawing.Point(144, 478);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(240, 180);
+            this.panel4.TabIndex = 5;
+            // 
+            // lbEarningTotal
+            // 
+            this.lbEarningTotal.AutoSize = true;
+            this.lbEarningTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEarningTotal.Location = new System.Drawing.Point(168, 143);
+            this.lbEarningTotal.Name = "lbEarningTotal";
+            this.lbEarningTotal.Size = new System.Drawing.Size(58, 16);
+            this.lbEarningTotal.TabIndex = 8;
+            this.lbEarningTotal.Text = "No Data";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 143);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(75, 16);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Total so far";
+            // 
+            // lbEarningsYearly
+            // 
+            this.lbEarningsYearly.AutoSize = true;
+            this.lbEarningsYearly.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEarningsYearly.Location = new System.Drawing.Point(168, 89);
+            this.lbEarningsYearly.Name = "lbEarningsYearly";
+            this.lbEarningsYearly.Size = new System.Drawing.Size(58, 16);
+            this.lbEarningsYearly.TabIndex = 5;
+            this.lbEarningsYearly.Text = "No Data";
+            // 
+            // lbEarningsMonthly
+            // 
+            this.lbEarningsMonthly.AutoSize = true;
+            this.lbEarningsMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEarningsMonthly.Location = new System.Drawing.Point(168, 40);
+            this.lbEarningsMonthly.Name = "lbEarningsMonthly";
+            this.lbEarningsMonthly.Size = new System.Drawing.Size(58, 16);
+            this.lbEarningsMonthly.TabIndex = 4;
+            this.lbEarningsMonthly.Text = "No Data";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(3, 89);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(47, 16);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Yearly";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(3, 40);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(54, 16);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Monthly";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(2, 2);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(85, 24);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Earnings";
             // 
             // Dashboard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -377,6 +496,8 @@ namespace EcoLease_Admin.UserControls
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -411,5 +532,15 @@ namespace EcoLease_Admin.UserControls
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lb;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbReservationsTotalCount;
+        private System.Windows.Forms.Label lbVehiclesTotalCount;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lbEarningTotal;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbEarningsYearly;
+        private System.Windows.Forms.Label lbEarningsMonthly;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }
