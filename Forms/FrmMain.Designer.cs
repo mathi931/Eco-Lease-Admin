@@ -32,7 +32,6 @@ namespace EcoLease_Admin
             this.btnDashboard = new System.Windows.Forms.Button();
             this.btnVehicles = new System.Windows.Forms.Button();
             this.btnReservations = new System.Windows.Forms.Button();
-            this.btnRequests = new System.Windows.Forms.Button();
             this.container = new System.Windows.Forms.Panel();
             this.output = new System.Windows.Forms.Label();
             this.btnCustomers = new System.Windows.Forms.Button();
@@ -41,7 +40,7 @@ namespace EcoLease_Admin
             // 
             // btnDashboard
             // 
-            this.btnDashboard.Location = new System.Drawing.Point(12, 146);
+            this.btnDashboard.Location = new System.Drawing.Point(21, 214);
             this.btnDashboard.Name = "btnDashboard";
             this.btnDashboard.Size = new System.Drawing.Size(175, 50);
             this.btnDashboard.TabIndex = 0;
@@ -51,7 +50,7 @@ namespace EcoLease_Admin
             // 
             // btnVehicles
             // 
-            this.btnVehicles.Location = new System.Drawing.Point(12, 232);
+            this.btnVehicles.Location = new System.Drawing.Point(21, 300);
             this.btnVehicles.Name = "btnVehicles";
             this.btnVehicles.Size = new System.Drawing.Size(175, 50);
             this.btnVehicles.TabIndex = 1;
@@ -61,23 +60,13 @@ namespace EcoLease_Admin
             // 
             // btnReservations
             // 
-            this.btnReservations.Location = new System.Drawing.Point(12, 317);
+            this.btnReservations.Location = new System.Drawing.Point(21, 385);
             this.btnReservations.Name = "btnReservations";
             this.btnReservations.Size = new System.Drawing.Size(175, 50);
             this.btnReservations.TabIndex = 2;
             this.btnReservations.Text = "Reservations";
             this.btnReservations.UseVisualStyleBackColor = true;
             this.btnReservations.Click += new System.EventHandler(this.btnAgreements_Click);
-            // 
-            // btnRequests
-            // 
-            this.btnRequests.Location = new System.Drawing.Point(12, 406);
-            this.btnRequests.Name = "btnRequests";
-            this.btnRequests.Size = new System.Drawing.Size(175, 50);
-            this.btnRequests.TabIndex = 3;
-            this.btnRequests.Text = "Requests";
-            this.btnRequests.UseVisualStyleBackColor = true;
-            this.btnRequests.Click += new System.EventHandler(this.btnRequests_Click);
             // 
             // container
             // 
@@ -97,7 +86,7 @@ namespace EcoLease_Admin
             // 
             // btnCustomers
             // 
-            this.btnCustomers.Location = new System.Drawing.Point(12, 492);
+            this.btnCustomers.Location = new System.Drawing.Point(21, 469);
             this.btnCustomers.Name = "btnCustomers";
             this.btnCustomers.Size = new System.Drawing.Size(175, 50);
             this.btnCustomers.TabIndex = 5;
@@ -111,7 +100,6 @@ namespace EcoLease_Admin
             this.ClientSize = new System.Drawing.Size(1264, 761);
             this.Controls.Add(this.btnCustomers);
             this.Controls.Add(this.container);
-            this.Controls.Add(this.btnRequests);
             this.Controls.Add(this.btnReservations);
             this.Controls.Add(this.btnVehicles);
             this.Controls.Add(this.btnDashboard);
@@ -134,7 +122,6 @@ namespace EcoLease_Admin
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Button btnVehicles;
         private System.Windows.Forms.Button btnReservations;
-        private System.Windows.Forms.Button btnRequests;
         private System.Windows.Forms.Panel container;
         private System.Windows.Forms.Label output;
         private System.Windows.Forms.Button btnCustomers;

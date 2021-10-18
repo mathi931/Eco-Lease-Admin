@@ -1,17 +1,12 @@
 ﻿using EcoLease_Admin.Data;
-using EcoLease_Admin.Data.Classes;
 using EcoLease_Admin.Models;
 using EcoLease_Admin.UserControls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace EcoLease_Admin
 {
@@ -54,16 +49,11 @@ namespace EcoLease_Admin
             showControl(this.container, agreements);
         }
 
-        private void btnRequests_Click(object sender, EventArgs e)
-        {
-            Requests requests = new Requests();
-            showControl(this.container, requests);
-        }
-
         private void btnCustomers_Click(object sender, EventArgs e)
         {
             Customers customers = new Customers();
             showControl(this.container, customers);
         }
+    
     }
 }

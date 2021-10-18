@@ -27,12 +27,6 @@ namespace EcoLease_Admin.Models
             Vehicle = vehicle;
         }
 
-        //Object to string
-        public override string ToString()
-        {
-            return $"{Customer} rented {Vehicle} ({LeaseBegin} - {LeaseLast}) ";
-        }
-
         //props
         public int RId { get; set; }
         public DateTime LeaseBegin { get; set; }
