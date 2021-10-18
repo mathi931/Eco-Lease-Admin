@@ -6,18 +6,19 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static EcoLease_Admin.Data.UrlHelper;
 
 namespace EcoLease_Admin.Data
 {
     public class ReservationProcessor : IReservationProcessor
 
     {
+        //inserts a new reservation
         public async Task<Uri> InsertReservation(Reservation reservation)
         {
-            string url = @"http://localhost:12506/api/Reservations";
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PostAsJsonAsync(url, reservation))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PostAsJsonAsync(ReservationsURL(null), reservation))
                 {
                     return res.Headers.Location;
                 };
@@ -29,11 +30,10 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //gets a reservation by ID
         public async Task<Reservation> LoadReservation(int id)
         {
-            string url = $"http://localhost:12506/api/Reservations/{id}";
-
-            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(url))
+            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(ReservationsURL(id)))
             {
                 if (res.IsSuccessStatusCode)
                 {
@@ -46,11 +46,10 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //gets all the reservations
         public async Task<List<Reservation>> LoadReservations()
         {
-            string url = "http://localhost:12506/api/Reservations";
-
-            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(url))
+            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(ReservationsURL(null)))
             {
                 if (res.IsSuccessStatusCode)
                 {
@@ -63,13 +62,12 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //removes reservation by ID
         public async Task<Uri> RemoveReservation(int id)
         {
-            string url = $"http://localhost:12506/api/Reservations/{id}";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.DeleteAsync(url))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.DeleteAsync(ReservationsURL(id)))
                 {
                     return res.Headers.Location;
                 };
@@ -81,13 +79,12 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //updates reservation by ID
         public async Task<Uri> UpdateReservation(Reservation reservation)
         {
-            string url = $"http://localhost:12506/api/Reservations?id={reservation.RId}";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(url, reservation))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(ReservationsURL(reservation.RId, true), reservation))
                 {
                     return res.Headers.Location;
                 };
@@ -99,13 +96,14 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //updates a reservations status by ID
         public async Task<Uri> UpdateReservationStatus(int id, string status)
         {
             string url = $"http://localhost:12506/api/Reservations/status?id={id}";
 
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(url, status))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(ReservationsURL(id, true, status), status))
                 {
                     return res.Headers.Location;
                 };

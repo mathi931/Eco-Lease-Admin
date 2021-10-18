@@ -6,17 +6,18 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static EcoLease_Admin.Data.UrlHelper;
 
 namespace EcoLease_Admin.Data
 {
     public class CustomerProcessor : ICustomerProcessor
     {
+        //inserts a new customer
         public async Task<Uri> InsertCustomer(Customer customer)
         {
-            string url = @"http://localhost:12506/api/Customers";
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PostAsJsonAsync(url, customer))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PostAsJsonAsync(CustomerURL(null), customer))
                 {
                     return res.Headers.Location;
                 };
@@ -28,11 +29,10 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //gets one customer by id
         public async Task<Customer> LoadCustomer(int id)
         {
-            string url = $"http://localhost:12506/api/Customers/{id}";
-
-            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(url))
+            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(CustomerURL(id)))
             {
                 if (res.IsSuccessStatusCode)
                 {
@@ -45,11 +45,10 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //get all customers
         public async Task<List<Customer>> LoadCustomers()
         {
-            string url = "http://localhost:12506/api/Customers";
-
-            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(url))
+            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(CustomerURL(null)))
             {
                 if (res.IsSuccessStatusCode)
                 {
@@ -62,13 +61,12 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //removes a customer by ID
         public async Task<Uri> RemoveCustomer(int id)
         {
-            string url = $"http://localhost:12506/api/Customers/{id}";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.DeleteAsync(url))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.DeleteAsync(CustomerURL(id)))
                 {
                     return res.Headers.Location;
                 };
@@ -80,13 +78,12 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //updates a customer by ID
         public async Task<Uri> UpdateCustomer(Customer customer)
         {
-            string url = $"http://localhost:12506/api/Customers?id={customer.CId}";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(url, customer))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(CustomerURL(customer.CId, true), customer))
                 {
                     return res.Headers.Location;
                 };

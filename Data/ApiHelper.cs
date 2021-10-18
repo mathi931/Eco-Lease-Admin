@@ -18,8 +18,12 @@ namespace EcoLease_Admin.Data.Classes
             ApiClient = new HttpClient();
             ApiClient.DefaultRequestHeaders.Accept.Clear();
             ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //ApiClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["baseURL"]);
+            ApiClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["baseURL"]);
         }
 
+        public static string getUrl()
+        {
+            return $"{ApiClient.BaseAddress}Vehicles";
+        }
     }
 }

@@ -6,16 +6,17 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using static EcoLease_Admin.Data.UrlHelper;
 
 namespace EcoLease_Admin.Data
 {
     public class VehicleProcessor : IVehicleProcessor
     {
+        //gets all vehicles
         public async Task<List<Vehicle>> LoadVehicles()
         {
-            string url = "http://localhost:12506/api/Vehicles";
-
-            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(url))
+            var path = VehiclesURL(null);
+            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(path))
             {
                 if (res.IsSuccessStatusCode)
                 {
@@ -28,11 +29,10 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //gets a vehicle by ID
         public async Task<Vehicle> LoadVehicle(int id)
         {
-            string url = $"http://localhost:12506/api/Vehicles/{id}";
-
-            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(url))
+            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(VehiclesURL(id)))
             {
                 if (res.IsSuccessStatusCode)
                 {
@@ -44,13 +44,13 @@ namespace EcoLease_Admin.Data
                 }
             }
         }
-
+        
+        //insert new vehicle
         public async Task<Uri> InsertVehicle(Vehicle vehicle)
         {
-            string url = @"http://localhost:12506/api/Vehicles";
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PostAsJsonAsync(url, vehicle))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PostAsJsonAsync(VehiclesURL(null), vehicle))
                 {
                     return res.Headers.Location;
                 };
@@ -63,13 +63,12 @@ namespace EcoLease_Admin.Data
 
         }
 
+        //updates vehicle by ID
         public async Task<Uri> UpdateVehicle(Vehicle vehicle)
         {
-            string url = $"http://localhost:12506/api/Vehicles?id={vehicle.VId}";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(url, vehicle))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(VehiclesURL(vehicle.VId, true), vehicle))
                 {
                     return res.Headers.Location;
                 };
@@ -81,13 +80,12 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //updates status by ID
         public async Task<Uri> UpdateVehicleStatus(Vehicle vehicle)
         {
-            string url = $"http://localhost:12506/api/Vehicles/status?id={vehicle.VId}";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(url, vehicle))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PutAsJsonAsync(VehiclesURL(vehicle.VId, true, vehicle.Status), vehicle))
                 {
                     return res.Headers.Location;
                 };
@@ -99,13 +97,12 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //removes by ID
         public async Task<Uri> RemoveVehicle(int id)
         {
-            string url = $"http://localhost:12506/api/Vehicles/{id}";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.DeleteAsync(url))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.DeleteAsync(VehiclesURL(id)))
                 {
                     return res.Headers.Location;
                 };

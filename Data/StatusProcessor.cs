@@ -6,16 +6,16 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static EcoLease_Admin.Data.UrlHelper;
 
 namespace EcoLease_Admin.Data
 {
     public class StatusProcessor : IStatusProcessor
     {
+        //gets statuses
         public async Task<List<Status>> LoadStatuses()
-        {
-            string url = "http://localhost:12506/api/Statuses";
-
-            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(url))
+        { 
+            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(StatusURL()))
             {
                 if (res.IsSuccessStatusCode)
                 {

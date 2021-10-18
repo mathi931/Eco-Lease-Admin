@@ -6,12 +6,7 @@ namespace EcoLease_Admin.Data.Classes
 {
     public static class DataAccessHelper
     {
-        public static string ConString(string name)
-        {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
-        }
-
-        public static string LocalHDDPath()
+        public static string Resources()
         {
             return $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\Resources\\";
         }

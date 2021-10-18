@@ -6,16 +6,16 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using static EcoLease_Admin.Data.UrlHelper;
 
 namespace EcoLease_Admin.Data
 {
     public class AgreementProcessor : IAgreementProcessor
     {
+        //gets agreement filename with reservation id
         public async Task<Agreement> GetFileName(int id)
         {
-            string url = $"http://localhost:12506/api/Agreements/{id}";
-
-            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(url))
+            using (HttpResponseMessage res = await ApiHelper.ApiClient.GetAsync(AgreementsURL(id)))
             {
                 if (res.IsSuccessStatusCode)
                 {
@@ -28,39 +28,34 @@ namespace EcoLease_Admin.Data
             }
         }
 
+        //inserts a new agreement
         public async Task<Uri> InsertAgreement(Agreement agreement)
         {
-            string url = @"http://localhost:12506/api/Agreements";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.PostAsJsonAsync(url, agreement))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.PostAsJsonAsync(AgreementsURL(null), agreement))
                 {
                     return res.Headers.Location;
                 };
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }
 
+        //removes agreement by id
         public async Task<Uri> RemoveAgreement(int id)
         {
-            string url = $"http://localhost:12506/api/Agreements/{id}";
-
             try
             {
-                using (HttpResponseMessage res = await ApiHelper.ApiClient.DeleteAsync(url))
+                using (HttpResponseMessage res = await ApiHelper.ApiClient.DeleteAsync(AgreementsURL(id)))
                 {
                     return res.Headers.Location;
                 };
             }
             catch (Exception ex)
             {
-
-
                 throw new Exception(ex.Message);
             }
         }
