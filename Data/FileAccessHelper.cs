@@ -4,7 +4,7 @@ using System.IO;
 
 namespace EcoLease_Admin.Data.Classes
 {
-    public static class DataAccessHelper
+    public static class FileAccessHelper
     {
         public static string Resources()
         {

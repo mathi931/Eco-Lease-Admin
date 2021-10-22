@@ -10,7 +10,6 @@ C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.exe
 C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.pdb
 C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\Dapper.dll
 C:\Users\Meszi\source\repos\EcoLease-Admin\bin\Debug\Dapper.xml
-C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease-Admin.csproj.CopyComplete
 C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Vehicles.resources
 C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Vehicles_Dashboard.resources
 C:\Users\Meszi\source\repos\EcoLease-Admin\obj\Debug\EcoLease_Admin.UserControls.Vehicles_Edit.resources

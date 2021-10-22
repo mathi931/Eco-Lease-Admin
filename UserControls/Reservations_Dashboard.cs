@@ -8,10 +8,12 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static EcoLease_Admin.Data.Classes.ApiHelper;
+using static EcoLease_Admin.Data.UrlHelper;
 
 namespace EcoLease_Admin.UserControls
 {
@@ -115,16 +117,21 @@ namespace EcoLease_Admin.UserControls
         }
         private async void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var clickedRow = dataGridView.Rows[e.RowIndex];
+            //selected row
+            var selectedRow = dataGridView.Rows[e.RowIndex];
+            int selectedID = -1;
+            Int32.TryParse(selectedRow.Cells["ID"].Value.ToString(), out selectedID);
 
-            if(clickedRow.Cells["Status"].Value.ToString() == "Active")
+            if(selectedRow.Cells["Status"].Value.ToString() == "Active" && selectedID != -1)
             {
-                var fileName = await new AgreementProcessor().GetFileName(Convert.ToInt32(clickedRow.Cells["ID"].Value.ToString()));
+                //get the agreement
+                var agreement = await new AgreementProcessor().GetFileName(selectedID);
 
-                //var path = $"{LocalHDDPath()}{fileName}";
-                var x = $"{ApiClient.BaseAddress}";
-                var y = getUrl();
-                System.Diagnostics.Process.Start(x);
+                //get the path
+                var path = FilesURL(agreement.FileName);
+
+                //opens the pdf
+                System.Diagnostics.Process.Start(path);
             }
         }
 

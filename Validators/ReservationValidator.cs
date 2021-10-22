@@ -15,15 +15,26 @@ namespace EcoLease_Admin.Validators
         {
             RuleFor(r => r.LeaseBegin)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("{PropertyName} is Empty");
+                .NotEmpty().WithMessage("{PropertyName} is Empty")
+                .Must(BeAValidStartDate).WithMessage("{PropertyName} cannot be older than 6 years and can not start later than a year from now");
 
             RuleFor(r => r.LeaseLast)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("{PropertyName} is Empty");
+                .NotEmpty().WithMessage("{PropertyName} is Empty")
+                .Must(BeAValidEndDate).WithMessage("{PropertyName} cannot be older than 6 years and can not last from now more than 6 years from now");
 
-            RuleFor(v => v.Status).NotEmpty().WithMessage("{PropertyName} is Empty");
+            RuleFor(v => v.Status)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("{PropertyName} is Empty")
+                .Must(BeAValidStatus).WithMessage("{PropertyName} must be on Pending or Active or Declined or Expired");
 
         }
+        protected bool BeAValidStatus(string status)
+        {
+            //it the status are one of these return true else false
+            return status == "Pending" || status == "Active" || status == "Declined" || status == "Expired";
+        }
+
         protected bool BeAValidStartDate(DateTime date)
         {
             int currentYear = DateTime.Now.Year;

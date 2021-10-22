@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static EcoLease_Admin.UserControls.Methods.MessageBoxes;
-using static EcoLease_Admin.Data.Classes.DataAccessHelper;
+using static EcoLease_Admin.Data.Classes.FileAccessHelper;
 using static EcoLease_Admin.Models.Operations;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -113,8 +113,13 @@ namespace EcoLease_Admin.UserControls
             {
                 try
                 {
-                    //have to check if the updated vehicles img is the same otherwise not upload it 
+                    //checks if the status change is possible
+                    bool isValidStatus = BeValidStatus(vehicle.VId).Result;
 
+                    if (!isValidStatus)
+                    {
+                        ErrorMessage("Can't change status because the vehicle is reserved or on lease!", "Error!");
+                    }
 
                     //sends put request with the valid object
                     await vehicleProc.UpdateVehicle(vehicle);
@@ -176,6 +181,7 @@ namespace EcoLease_Admin.UserControls
             {
                 vehicle.VId = res;
             }
+
             return vehicle;
             
         }
@@ -214,7 +220,10 @@ namespace EcoLease_Admin.UserControls
         {
             //set status combobox values
             var statusProc = new StatusProcessor();
-            cmbStatus.DataSource = await statusProc.LoadStatuses();
+            var statuses = await statusProc.LoadStatuses();
+            cmbStatus.DataSource = statuses.Where(x => x.Name == "Available" || x.Name == "Out of service" || x.Name == "On lease" || x.Name == "Reserved").ToList();
+
+            //set vehicles
             vehicles = await vehicleProc.LoadVehicles();
         }
 
@@ -227,6 +236,22 @@ namespace EcoLease_Admin.UserControls
             inputSetter.SetNumUpDown(numKm, 100, 100, 200000);
             inputSetter.SetNumUpDown(numPrice, 200, 200, 1000);
             inputSetter.SetNumUpDown(numYear, yearNow, yearNow - 20, yearNow);
+        }
+
+        private async Task<bool> BeValidStatus(int id)
+        {
+            bool valid = true;
+            var reservations = await new ReservationProcessor().LoadReservations();
+
+            foreach (var reservation in reservations.Where(x=> x.Status== "Active" || x.Status == "Pending"))
+            {
+                if(reservation.Vehicle.VId == id)
+                {
+                    valid = false;
+                }
+            }
+
+            return valid;
         }
     }
 }

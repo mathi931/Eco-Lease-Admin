@@ -77,7 +77,7 @@
   <ItemGroup>
     <Compile Include="Data\AgreementProcessor.cs" />
     <Compile Include="Data\ApiHelper.cs" />
-    <Compile Include="Data\DataAccessHelper.cs" />
+    <Compile Include="Data\FileAccessHelper.cs" />
     <Compile Include="Data\CustomerProcessor.cs" />
     <Compile Include="Data\FileProcessor.cs" />
     <Compile Include="Data\IAgreementProcessor.cs" />
@@ -89,12 +89,6 @@
     <Compile Include="Data\ReservationProcessor.cs" />
     <Compile Include="Data\StatusProcessor.cs" />
     <Compile Include="Data\UrlHelper.cs" />
-    <Compile Include="Forms\FrmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmLogin.Designer.cs">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>

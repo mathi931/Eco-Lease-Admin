@@ -10,21 +10,7 @@ namespace EcoLease_Admin.Models
     {
         //props
         public int VId { get; set; }
-        public string Make
-        {
-            get { return _make; }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    _make = value;
-                }
-                else
-                {
-                    throw new Exception("The Make field can not be empty!");
-                }
-            }
-        }
+        public string Make { get; set; }
         public string Model { get; set; }
         public int Registered { get; set; }
         public string PlateNo { get; set; }
@@ -73,15 +59,5 @@ namespace EcoLease_Admin.Models
         {
             return $" {VId} - {Make} {Model}"; 
         }
-
-        //private int _vID;
-        private string _make;
-        //private string _model;
-        //private int _registered;
-        //private string _plateNo;
-        //private int _km;
-        //private string _notes;
-        //private string _status;
-        //private string _img;
     }
 }

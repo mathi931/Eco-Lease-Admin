@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Class Name="EcoLease_Admin.Data.AgreementProcessor" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Data\AgreementProcessor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EcoLease_Admin.Data.CustomerProcessor" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="1.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAQAgAAAAAAAAAAEAAAAAAAAAAAE=</HashCode>
+      <FileName>Data\CustomerProcessor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EcoLease_Admin.Data.FileProcessor" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\FileProcessor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EcoLease_Admin.Data.ReservationProcessor" BaseTypeListCollapsed="true">
+    <Position X="24.5" Y="1.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAABCAEAAAAAABAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Data\ReservationProcessor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EcoLease_Admin.Data.StatusProcessor" BaseTypeListCollapsed="true">
+    <Position X="21" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\StatusProcessor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EcoLease_Admin.Data.UrlHelper" Collapsed="true">
+    <Position X="53.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAACAAAIAAAAIAAAAAAAAABAAIAAAAA=</HashCode>
+      <FileName>Data\UrlHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Data.VehicleProcessor" BaseTypeListCollapsed="true">
+    <Position X="11" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAABAAAAAAAACAAAAAAAAAAAAAAAAAAAAAgBAAAA=</HashCode>
+      <FileName>Data\VehicleProcessor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EcoLease_Admin.Data.Classes.ApiHelper" Collapsed="true">
+    <Position X="49.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAgAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\ApiHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Data.Classes.FileAccessHelper" Collapsed="true">
+    <Position X="49.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\FileAccessHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.FrmMain" Collapsed="true">
+    <Position X="43.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAACACAAAAIAAACEABACCAAAAEAAAABQAAFAAAA=</HashCode>
+      <FileName>Forms\FrmMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Program" Collapsed="true">
+    <Position X="48" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Models.Agreement">
+    <Position X="31.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAEQAAAAAAAAAAACAAAAAIgABAAEA=</HashCode>
+      <FileName>Models\Agreement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Models.Customer">
+    <Position X="36.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAEAAAAAAAAAAAQAAAAAAAAAAAAAEg=</HashCode>
+      <FileName>Models\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Models.Operations" Collapsed="true">
+    <Position X="48" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Operations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Models.Reservation">
+    <Position X="39.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAGAAgAAAAAAAAAAAAABAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\Reservation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Models.Status">
+    <Position X="34.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Models\Status.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Models.Vehicle">
+    <Position X="28.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAUAQAAAEAEEEAAAAAAAAAAAAAAAAgAAAIAAgA=</HashCode>
+      <FileName>Models\Vehicle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Properties.Resources">
+    <Position X="39.25" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Properties.Settings" Collapsed="true">
+    <Position X="48" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Customers">
+    <Position X="46.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACAAAABAygQAFERAgCAAEASAgBQAIAAAAQAAgQGEQA=</HashCode>
+      <FileName>UserControls\Customers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Dashboard">
+    <Position X="59.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>/wIACAGAACAAEBFAAACAUhACuAQAAgAAgAAAQwAQIDI=</HashCode>
+      <FileName>UserControls\Dashboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Reservations">
+    <Position X="48" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAEgAACACAgAAgQAACAAAICAAAYAEgAAQAAAgAEAAI=</HashCode>
+      <FileName>UserControls\Reservations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Reservations_Dashboard">
+    <Position X="49.75" Y="0.5" Width="2" />
+    <NestedTypes>
+      <Delegate Name="EcoLease_Admin.UserControls.Reservations_Dashboard.SelectedReservationChangedEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UserControls\Reservations_Dashboard.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAABEgAAQChAAEAAIACAAAECAAAAAAAAAAQAIgACCAA=</HashCode>
+      <FileName>UserControls\Reservations_Dashboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Reservations_Edit">
+    <Position X="52" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAEQAAABSABABkQAACAAEACAwAKEAAAAAIAQAAEAAI=</HashCode>
+      <FileName>UserControls\Reservations_Edit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Vehicles">
+    <Position X="53.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAgAAEACAACAAQEACAAAACAAAAgAAAAYAAAgAEAAI=</HashCode>
+      <FileName>UserControls\Vehicles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Vehicles_Dashboard">
+    <Position X="55.5" Y="0.5" Width="1.75" />
+    <NestedTypes>
+      <Delegate Name="EcoLease_Admin.UserControls.Vehicles_Dashboard.SelectedVehicleChangedEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UserControls\Vehicles_Dashboard.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAAAQAAAACAAAAQAEACAAAACgACACAAAAQQgAAAAAAA=</HashCode>
+      <FileName>UserControls\Vehicles_Dashboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Vehicles_Edit">
+    <Position X="57.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>E4AMYBCABSABABkAAATAAEACAAgGAAAAAICAAAAEIAw=</HashCode>
+      <FileName>UserControls\Vehicles_Edit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Functions.DataGridViewMethods" Collapsed="true">
+    <Position X="53.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\Methods\DataGridViewMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Functions.DataTableExtensions" Collapsed="true">
+    <Position X="49.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\Methods\DataTableExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Methods.MessageBoxes" Collapsed="true">
+    <Position X="53.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBAAACACAAAA=</HashCode>
+      <FileName>UserControls\Methods\MessageBoxes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.UserControls.Methods.SetInput">
+    <Position X="42.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\Methods\SetInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Validators.CustomerValidator">
+    <Position X="61" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Validators\CustomerValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Validators.ReservationValidator">
+    <Position X="61" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Validators\ReservationValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoLease_Admin.Validators.VehicleValidator">
+    <Position X="61" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Validators\VehicleValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="27.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="EcoLease_Admin.Data.IAgreementProcessor">
+    <Position X="46.25" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Data\IAgreementProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EcoLease_Admin.Data.ICustomerProcessor">
+    <Position X="48.25" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAQAgAAAAAAAAAAEAAAAAAAAAAAE=</HashCode>
+      <FileName>Data\ICustomerProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EcoLease_Admin.Data.IFileProcessor">
+    <Position X="50.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\IFileProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EcoLease_Admin.Data.IReservationProcessor">
+    <Position X="52" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAABCAEAAAAAABAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Data\IReservationProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EcoLease_Admin.Data.IStatusProcessor">
+    <Position X="54" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\IStatusProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EcoLease_Admin.Data.IVehicleProcessor">
+    <Position X="55.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAABAAAAAAAACAAAAAAAAAAAAAAAAAAAAAgBAAAA=</HashCode>
+      <FileName>Data\IVehicleProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

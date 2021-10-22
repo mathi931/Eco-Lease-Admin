@@ -5,14 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EcoLease_Admin
+namespace WindowsFormsApplication
 {
-    public partial class FrmLogin : Form
+    public partial class Form1 : Form
     {
-        public FrmLogin()
+        public Form1()
         {
             InitializeComponent();
         }

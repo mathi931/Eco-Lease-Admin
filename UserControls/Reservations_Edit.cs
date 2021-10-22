@@ -41,7 +41,8 @@ namespace EcoLease_Admin.UserControls
             var inputFiller = new SetInput();
 
             //loads the comboboxes
-            cmbStatus.DataSource = await statusProc.LoadStatuses();
+            var statuses = await statusProc.LoadStatuses();
+            cmbStatus.DataSource = statuses.Where(x => x.Name == "Pending" || x.Name == "Active" || x.Name == "Declined" || x.Name == "Expired" ).ToList();
             cmbCustomer.DataSource = await customerProc.LoadCustomers();
             cmbVehicles.DataSource = await vehicleProc.LoadVehicles();
 

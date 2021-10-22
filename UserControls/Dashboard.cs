@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static EcoLease_Admin.UserControls.Methods.MessageBoxes;
 
 namespace EcoLease_Admin.UserControls
 {
@@ -42,7 +43,7 @@ namespace EcoLease_Admin.UserControls
         private void fillRequestPnl(List<Reservation> requests)
         {
             lblPendingRequestCount.Text = reservations.Count(n => n.Status == "Pending").ToString();
-            lblConfirmedRequestCount.Text = reservations.Count(n => n.Status == "Confirmed").ToString();
+            lblConfirmedRequestCount.Text = reservations.Count(n => n.Status == "Active").ToString();
             lblDeclinedRequestCount.Text = reservations.Count(n => n.Status == "Declined").ToString();
         }
 
@@ -106,18 +107,49 @@ namespace EcoLease_Admin.UserControls
         //gets all the data and saves it locally
         private async Task getAllData()
         {
-            vehicles =  await new VehicleProcessor().LoadVehicles();
+            try
+            {
+                vehicles = await new VehicleProcessor().LoadVehicles();
 
-            reservations = await new ReservationProcessor().LoadReservations();
+                reservations = await new ReservationProcessor().LoadReservations();
+                
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage($"Failed to connect with the server\n{ex.Message}", "Error during connection!");
+                Application.Exit();
+            }
         }
 
         private async void Dashboard_Load(object sender, EventArgs e)
         {
+
             //gets all the data
             await getAllData();
 
+            //check if reservations up to date
+            await checkReservationDates();
+
             //fill the data in
             fillView(vehicles, reservations);
+        }
+
+        private async Task checkReservationDates()
+        {
+            //selects reservations what expired
+            foreach (var reservation in reservations.Where(x => x.LeaseLast < DateTime.Now))
+            {
+                var expired = "Expired";
+                var available = "Available";
+
+                //updates reservation if expired
+                reservation.Status = expired;
+                await new ReservationProcessor().UpdateReservationStatus(reservation.RId, expired);
+
+                //updates vehicle if expired
+                reservation.Vehicle.Status = available;
+                await new VehicleProcessor().UpdateVehicleStatus(reservation.Vehicle);
+            }
         }
     }
 }

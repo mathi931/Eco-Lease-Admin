@@ -152,6 +152,9 @@ namespace EcoLease_Admin.UserControls
                         //after user confirmation sends a put request with the selected object
                         await new ReservationProcessor().UpdateReservationStatus(selected.RId, "Active");
 
+                        selected.Vehicle.Status = "On lease";
+                        await new VehicleProcessor().UpdateVehicleStatus(selected.Vehicle);
+
                         //create a contract
                         Agreement agr = new Agreement(selected);
                         await new AgreementProcessor().InsertAgreement(agr);

@@ -54,6 +54,5 @@ namespace EcoLease_Admin
             Customers customers = new Customers();
             showControl(this.container, customers);
         }
-    
     }
 }

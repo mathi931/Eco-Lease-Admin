@@ -9,7 +9,7 @@ using IronPdf;
 using System.Drawing;
 using static EcoLease_Admin.Data.UrlHelper;
 using System.IO;
-using static EcoLease_Admin.Data.Classes.DataAccessHelper;
+using static EcoLease_Admin.Data.Classes.FileAccessHelper;
 using System.Net.Http.Headers;
 
 namespace EcoLease_Admin.Data
